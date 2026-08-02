@@ -81,11 +81,11 @@
 ### Current Asset Palette
 
 Use existing named colors first:
-- `Black`
-- `Brown`
+- `TargetBlack`
+- `TargetBrown`
 - `Gold`
 - `Sage`
-- `White`
+- `TargetWhite`
 
 If new colors are needed, document them in `ui-context.md` first.
 

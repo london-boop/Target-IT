@@ -195,11 +195,11 @@ Target-IT must have its **own visual identity** and should not feel like a reski
 ### Asset Guidance
 
 Current shared color assets already include:
-- `Black`
-- `Brown`
+- `TargetBlack`
+- `TargetBrown`
 - `Gold`
 - `Sage`
-- `White`
+- `TargetWhite`
 
 Use these assets first before adding new colors.
 

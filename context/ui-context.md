@@ -19,10 +19,10 @@ The project already includes named color assets that should anchor the design.
 
 | Role | Asset Name | Approx. Value | Usage |
 |------|------------|---------------|-------|
-| Base background | `Black` | `#000000` (light appearance) | App background, dark shell, premium contrast foundation |
-| Primary text / inverted surfaces | `White` | `#FFFFFF` | Text on dark surfaces, high-contrast labels |
+| Base background | `TargetBlack` | `#000000` (light appearance) | App background, dark shell, premium contrast foundation |
+| Primary text / inverted surfaces | `TargetWhite` | `#FFFFFF` | Text on dark surfaces, high-contrast labels |
 | Warm accent | `Gold` | approx `#CCA817` | Totals, highlights, key money moments, progress emphasis |
-| Secondary accent | `Brown` | approx `#614913` | Supporting financial accents, chart details, buttons, badges |
+| Secondary accent | `TargetBrown` | approx `#614913` | Supporting financial accents, chart details, buttons, badges |
 | Success / savings accent | `Sage` | approx `#85CF A2` | Savings growth, successful cancellation outcomes, positive states |
 
 ### Important Note
@@ -33,8 +33,8 @@ Several current color assets use white in dark appearance variants. During imple
 
 - Use `Gold` for high-value information such as savings totals, feature emphasis, or selected states
 - Use `Sage` for positive outcomes like “saved”, “goal progress”, and successful reroutes
-- Use `Brown` for softer supporting emphasis and secondary finance accents
-- Use `White` for primary text on dark surfaces
+- Use `TargetBrown` for softer supporting emphasis and secondary finance accents
+- Use `TargetWhite` for primary text on dark surfaces
 - Never rely on color alone to indicate subscription status
 
 ## Typography
@@ -90,7 +90,7 @@ Target-IT should feel smooth and modern, not sharp or boxy.
 
 **Secondary CTA**
 - Outlined or softer filled style
-- Use `Brown` or translucent white-on-dark treatment
+- Use `TargetBrown` or translucent white-on-dark treatment
 
 **Tertiary / Text CTA**
 - For “Skip”, “Restart Tour”, “View All”, etc.

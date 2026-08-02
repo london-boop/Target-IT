@@ -186,7 +186,8 @@ Supporting architecture expectations:
 - The team wants `LoadingView.swift` to remain their splash/loading screen identity, using native SwiftUI `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`.
 - `ContentView.swift` is now acting as a temporary root flow, but it does not yet reflect the final prototype architecture.
 - There appear to be duplicate project artifacts (`TargetIT.xcodeproj` at root and nested path), though the project file contents currently match.
-- Color assets exist, but dark-mode behavior should be verified during implementation because named colors like `Gold`, `Brown`, and `Sage` currently flip to white in dark appearance definitions.
+- Color assets exist, but dark-mode behavior should be verified during implementation because named colors like `Gold` and `Sage` currently flip to white in dark appearance definitions.
+- Conflicting asset names `Black`, `Brown`, and `White` were renamed to `TargetBlack`, `TargetBrown`, and `TargetWhite` to avoid generated symbol conflicts in Xcode.
 - Build verification is blocked on this host because Xcode tooling is unavailable in the Linux environment.
 
 ## Architecture Decisions

@@ -60,6 +60,7 @@ Update this file after every meaningful implementation change.
 - Preserved the team's preferred native `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`
 - Added a short branded loading experience with Reduce Motion-aware behavior
 - Updated `ContentView.swift` to transition from `LoadingView` into a branded welcome placeholder instead of the broken initial layout
+- Logged Xcode-side build issues reported from the student Mac for test imports and asset-name conflicts
 
 ---
 
@@ -106,8 +107,11 @@ Update this file after every meaningful implementation change.
 - `ContentView.swift` now acts as a temporary root flow: `LoadingView` → branded welcome placeholder.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
-- Existing color assets are present (`Black`, `Brown`, `Gold`, `Sage`, `White`) and should be used before adding new palette values.
+- Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.
+- Student Xcode build report surfaced two concrete issues, both now addressed in the workspace:
+  - replaced `import Testing` with `XCTest` placeholder tests in `TargetITTests.swift`
+  - renamed conflicting asset names `Black`, `Brown`, and `White` to `TargetBlack`, `TargetBrown`, and `TargetWhite`
 
 ### Product Findings from PDFs
 
@@ -135,6 +139,7 @@ Update this file after every meaningful implementation change.
 ### Phase 2 — App Stabilization
 - ✅ Fix malformed SwiftUI files
 - ✅ Establish a clean entry flow
+- ✅ Fix Xcode test import issue and asset symbol conflicts
 - ⏳ Verify app builds and launches in a macOS/Xcode environment
 
 ### Phase 3 — App Shell & Local Data Foundation

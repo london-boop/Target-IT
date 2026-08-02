@@ -5,15 +5,13 @@
 //  Created by JOURNi Student on 7/23/26.
 //
 
-import Testing
+import XCTest
 @testable import TargetIT
 
-struct TargetITTests {
+final class TargetITTests: XCTestCase {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-        // Swift Testing Documentation
-        // https://developer.apple.com/documentation/testing
+    func testExample() throws {
+        // This placeholder test keeps the target buildable while the MVP foundation is being stabilized.
+        XCTAssertTrue(true)
     }
-
 }
