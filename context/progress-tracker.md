@@ -72,6 +72,7 @@ Update this file after every meaningful implementation change.
 - Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
 - Updated `ContentView.swift` to honor Reduce Motion during the LoadingView → WelcomeView handoff by skipping the fade animation when motion reduction is enabled
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
+- Applied the same light onboarding background treatment to the tour and auth placeholder screens so the onboarding flow does not jump back to a dark page
 - Corrected onboarding contrast so the light `LoadingView`/`WelcomeView` background uses darker title, tagline, and supporting text, keeping the splash and welcome screens visually consistent
 - Restored `LoadingView` to the earlier larger-logo, staggered-animation version with the horizontal tagline entrance that Tone explicitly called back to
 - Reapplied and clarified the exact shared onboarding background direction: a white-to-light-brown `LinearGradient` from top to bottom on both `LoadingView` and `WelcomeView`

@@ -18,9 +18,19 @@ struct InteractiveTourView: View {
     // Core feature pages pulled from the prototype PDF direction.
     private let steps = DemoData.tourSteps
 
+    // Match the lighter onboarding background used by LoadingView and WelcomeView.
+    private let gradientBackground = LinearGradient(
+        colors: [
+            Color.white,
+            Color(.sRGB, red: 0.94, green: 0.91, blue: 0.88, opacity: 1.0)
+        ],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+
     var body: some View {
         ZStack {
-            Color("TargetBlack")
+            gradientBackground
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -28,7 +38,7 @@ struct InteractiveTourView: View {
                 HStack {
                     Text("Step \(currentStep + 1) of \(steps.count)")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color("TargetWhite").opacity(0.78))
+                        .foregroundStyle(Color("TargetBlack").opacity(0.72))
 
                     Spacer()
 
@@ -57,7 +67,7 @@ struct InteractiveTourView: View {
                 HStack(spacing: 8) {
                     ForEach(0..<steps.count, id: \.self) { index in
                         Capsule()
-                            .fill(index == currentStep ? Color("Gold") : Color("TargetWhite").opacity(0.14))
+                            .fill(index == currentStep ? Color("Gold") : Color("TargetBrown").opacity(0.18))
                             .frame(width: index == currentStep ? 28 : 10, height: 10)
                     }
                 }
@@ -74,11 +84,11 @@ struct InteractiveTourView: View {
                             Text("Back")
                         }
                         .font(.headline)
-                        .foregroundStyle(currentStep == 0 ? Color("TargetWhite").opacity(0.4) : Color("Gold"))
+                        .foregroundStyle(currentStep == 0 ? Color("TargetBlack").opacity(0.35) : Color("Gold"))
                         .frame(maxWidth: .infinity, minHeight: 54)
                         .background(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(currentStep == 0 ? Color("TargetWhite").opacity(0.12) : Color("Gold"), lineWidth: 1.4)
+                                .stroke(currentStep == 0 ? Color("TargetBrown").opacity(0.16) : Color("Gold"), lineWidth: 1.4)
                         )
                     }
                     .disabled(currentStep == 0)

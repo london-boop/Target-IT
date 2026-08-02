@@ -23,18 +23,18 @@ struct TourStepView: View {
 
                     Text(step.title)
                         .font(.system(size: 30, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color("TargetWhite"))
+                        .foregroundStyle(Color("TargetBlack"))
 
                     Text(step.subtitle)
                         .font(.body)
-                        .foregroundStyle(Color("TargetWhite").opacity(0.8))
+                        .foregroundStyle(Color("TargetBrown"))
                 }
 
                 // Accent card brings in the finance/product feel from the PDF.
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Preview")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color("TargetWhite").opacity(0.7))
+                        .foregroundStyle(Color("TargetBrown"))
 
                     Text(step.accentText)
                         .font(.title2.weight(.bold))
@@ -42,7 +42,7 @@ struct TourStepView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(20)
-                .background(panelColor)
+                .background(Color.white.opacity(0.92))
                 .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
 
                 // Detail rows explain the user value of the current feature.
@@ -70,12 +70,12 @@ struct TourDetailRow: View {
 
             Text(text)
                 .font(.subheadline)
-                .foregroundStyle(Color("TargetWhite").opacity(0.82))
+                .foregroundStyle(Color("TargetBlack"))
 
             Spacer()
         }
         .padding(16)
-        .background(Color.white.opacity(0.08))
+        .background(Color.white.opacity(0.92))
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }

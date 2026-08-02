@@ -11,18 +11,25 @@ import SwiftUI
 struct LoginView: View {
     var body: some View {
         ZStack {
-            Color("TargetBlack")
-                .ignoresSafeArea()
+            LinearGradient(
+                colors: [
+                    Color.white,
+                    Color(.sRGB, red: 0.94, green: 0.91, blue: 0.88, opacity: 1.0)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     Text("Login")
                         .font(.system(size: 30, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color("TargetWhite"))
+                        .foregroundStyle(Color("TargetBlack"))
 
                     Text("This placeholder keeps the login route in place until the full returning-user flow is implemented.")
                         .font(.body)
-                        .foregroundStyle(Color("TargetWhite").opacity(0.8))
+                        .foregroundStyle(Color("TargetBrown"))
 
                     // Placeholder fields define the basic login structure.
                     PlaceholderField(label: "Email")
@@ -43,7 +50,7 @@ struct LoginView: View {
                     HStack(spacing: 4) {
                         Text("Need an account?")
                             .font(.callout)
-                            .foregroundStyle(Color("TargetWhite").opacity(0.8))
+                            .foregroundStyle(Color("TargetBlack").opacity(0.72))
 
                         NavigationLink(destination: SignUpView()) {
                             Text("Sign up")
