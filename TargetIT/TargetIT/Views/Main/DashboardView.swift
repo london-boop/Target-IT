@@ -11,27 +11,21 @@ struct DashboardView: View {
     // Lets the dashboard ask the shell to replay the tour.
     let onReplayTour: () -> Void
 
-    private let subscriptions = DemoData.subscriptions
-    private let goals = DemoData.goals
-    private let reminders = DemoData.reminders
+    @EnvironmentObject private var appDataStore: AppDataStore
 
     // Counts subscriptions that are still active or ending soon.
     private var activeSubscriptionsCount: Int {
-        subscriptions.filter { $0.status != .canceled }.count
+        appDataStore.subscriptions.filter { $0.status != .canceled }.count
     }
 
     // Adds together active recurring monthly costs.
     private var monthlySpend: Double {
-        subscriptions
-            .filter { $0.status != .canceled }
-            .reduce(0) { $0 + $1.monthlyCost }
+        appDataStore.activeMonthlySpend
     }
 
     // Adds together canceled subscription amounts to show saved money.
     private var totalSaved: Double {
-        subscriptions
-            .filter { $0.status == .canceled }
-            .reduce(0) { $0 + $1.monthlyCost }
+        appDataStore.recoveredSavings
     }
 
     var body: some View {
@@ -75,7 +69,7 @@ struct DashboardView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     sectionTitle("Coming Up")
 
-                    ForEach(reminders.prefix(2)) { reminder in
+                    ForEach(appDataStore.reminders.prefix(2)) { reminder in
                         ReminderCard(reminder: reminder)
                     }
                 }
@@ -84,7 +78,7 @@ struct DashboardView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     sectionTitle("Savings Goals")
 
-                    ForEach(goals) { goal in
+                    ForEach(appDataStore.goals) { goal in
                         SavingsGoalCard(goal: goal)
                     }
                 }

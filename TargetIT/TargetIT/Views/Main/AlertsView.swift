@@ -2,23 +2,85 @@
 //  AlertsView.swift
 //  TargetIT
 //
-//  Lists seeded notifications for the Phase 3 shell.
+//  Combined reminder center for upcoming billing reminders and notification feed items.
 //
 
 import SwiftUI
 
 struct AlertsView: View {
-    private let notifications = DemoData.notifications
+    @EnvironmentObject private var appDataStore: AppDataStore
+
+    // These small text helpers keep the summary sentence grammatically correct.
+    private var reminderCountText: String {
+        let count = appDataStore.reminders.count
+        return "\(count) \(count == 1 ? "reminder" : "reminders")"
+    }
+
+    private var notificationCountText: String {
+        let count = appDataStore.notifications.count
+        return "\(count) \(count == 1 ? "feed update" : "feed updates")"
+    }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Alerts")
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Reminder Center")
                     .font(.title2.weight(.bold))
                     .foregroundStyle(Color("TargetBlack"))
 
-                ForEach(notifications) { notification in
-                    NotificationCard(notification: notification)
+                // Quick summary helps the user scan how many items need attention.
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("What Needs Attention")
+                        .font(.headline)
+                        .foregroundStyle(Color("TargetBrown"))
+
+                    Text("\(reminderCountText) · \(notificationCountText)")
+                        .font(.subheadline)
+                        .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                }
+                .padding(18)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(panelColor)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 14) {
+                    Text("Upcoming Reminders")
+                        .font(.headline)
+                        .foregroundStyle(Color("TargetBrown"))
+
+                    if appDataStore.reminders.isEmpty {
+                        Text("No upcoming reminders.")
+                            .font(.subheadline)
+                            .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                            .padding(18)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(panelColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    } else {
+                        ForEach(appDataStore.reminders) { reminder in
+                            ReminderCard(reminder: reminder)
+                        }
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: 14) {
+                    Text("Notification Feed")
+                        .font(.headline)
+                        .foregroundStyle(Color("TargetBrown"))
+
+                    if appDataStore.notifications.isEmpty {
+                        Text("No notifications yet.")
+                            .font(.subheadline)
+                            .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                            .padding(18)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(panelColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    } else {
+                        ForEach(appDataStore.notifications) { notification in
+                            NotificationCard(notification: notification)
+                        }
+                    }
                 }
             }
             .padding(20)
@@ -29,4 +91,5 @@ struct AlertsView: View {
 
 #Preview {
     AlertsView()
+        .environmentObject(AppDataStore())
 }

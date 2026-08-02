@@ -10,7 +10,11 @@ import SwiftUI
 
 struct InteractiveTourView: View {
     // When true, the tour is being replayed from inside the app shell.
-    let isReplayMode: Bool = false
+    let isReplayMode: Bool
+
+    init(isReplayMode: Bool = false) {
+        self.isReplayMode = isReplayMode
+    }
 
     // Tracks which tour step is currently being shown.
     @State private var currentStep = 0

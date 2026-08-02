@@ -72,7 +72,7 @@ struct SignUpView: View {
             }
         }
         .navigationDestination(item: $authenticatedUser) { _ in
-            MainTabView()
+            AppRootShellView()
         }
         .toolbar(.hidden, for: .navigationBar)
     }

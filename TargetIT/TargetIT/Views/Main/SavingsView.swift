@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SavingsView: View {
-    private let goals = DemoData.goals
+    @EnvironmentObject private var appDataStore: AppDataStore
 
     var body: some View {
         ScrollView {
@@ -17,7 +17,7 @@ struct SavingsView: View {
                     .font(.title2.weight(.bold))
                     .foregroundStyle(Color("TargetBlack"))
 
-                ForEach(goals) { goal in
+                ForEach(appDataStore.goals) { goal in
                     SavingsGoalCard(goal: goal)
                 }
             }

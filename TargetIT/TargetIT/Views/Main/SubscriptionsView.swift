@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct SubscriptionsView: View {
-    private let subscriptions = DemoData.subscriptions
+    @EnvironmentObject private var appDataStore: AppDataStore
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Subscriptions")
-                    .font(.title2.weight(.bold))
-                    .foregroundStyle(Color("TargetBlack"))
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Subscriptions")
+                        .font(.title2.weight(.bold))
+                        .foregroundStyle(Color("TargetBlack"))
 
-                ForEach(subscriptions) { subscription in
-                    SubscriptionCard(subscription: subscription)
+                    ForEach(appDataStore.subscriptions) { subscription in
+                        NavigationLink(destination: SubscriptionDetailView(subscription: subscription)) {
+                            SubscriptionCard(subscription: subscription)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
+                .padding(20)
             }
-            .padding(20)
+            .background(Color.white.ignoresSafeArea())
+            .navigationTitle("Subscriptions")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .background(Color.white.ignoresSafeArea())
     }
 }
 

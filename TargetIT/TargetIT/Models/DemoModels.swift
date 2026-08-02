@@ -16,7 +16,7 @@ struct SubscriptionRecord: Identifiable {
     let category: String
     let monthlyCost: Double
     let nextBillingDate: Date
-    let status: SubscriptionStatus
+    var status: SubscriptionStatus
 }
 
 // MARK: - Subscription Status
@@ -93,7 +93,7 @@ struct SavingsGoal: Identifiable {
     let id = UUID()
     let title: String
     let targetAmount: Double
-    let currentAmount: Double
+    var currentAmount: Double
     let targetDate: Date
 }
 
