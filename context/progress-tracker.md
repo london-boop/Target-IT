@@ -71,6 +71,7 @@ Update this file after every meaningful implementation change.
 - Split the implementation into separate onboarding files, main shell files, reusable components, models, and utilities so the structure now matches the teaching pattern more closely
 - Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
+- Corrected onboarding contrast so the light `LoadingView`/`WelcomeView` background uses darker title, tagline, and supporting text, keeping the splash and welcome screens visually consistent
 - Updated `WelcomeView` to use the same light gradient background as `LoadingView` so onboarding stays visually consistent from splash to welcome
 - Screenshot review showed Xcode was paused in the debugger at `LoadingView`, so the white-screen symptom was partly caused by debug pause state rather than the view never loading
 

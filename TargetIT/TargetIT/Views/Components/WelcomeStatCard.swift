@@ -15,7 +15,7 @@ struct WelcomeStatCard: View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(Color("TargetWhite").opacity(0.72))
+                .foregroundStyle(Color("TargetBrown"))
 
             Text(value)
                 .font(.title3.weight(.bold))
@@ -23,7 +23,7 @@ struct WelcomeStatCard: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(Color.white.opacity(0.08))
+        .background(Color.white.opacity(0.48))
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }

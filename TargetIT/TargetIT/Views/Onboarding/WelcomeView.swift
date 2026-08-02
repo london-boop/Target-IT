@@ -48,12 +48,12 @@ struct WelcomeView: View {
                         VStack(spacing: 12) {
                             Text("Take Control of Your Subscriptions")
                                 .font(.system(size: titleSize, weight: .bold, design: .rounded))
-                                .foregroundStyle(Color("TargetWhite"))
+                                .foregroundStyle(Color("TargetBlack"))
                                 .multilineTextAlignment(.center)
 
                             Text("Track recurring charges, catch renewals early, and turn canceled subscriptions into savings.")
                                 .font(.system(size: taglineSize, weight: .medium))
-                                .foregroundStyle(Color("TargetWhite").opacity(0.82))
+                                .foregroundStyle(Color("TargetBrown"))
                                 .multilineTextAlignment(.center)
                                 .lineSpacing(4)
                                 .padding(.horizontal, 28)
@@ -103,7 +103,7 @@ struct WelcomeView: View {
                         HStack(spacing: 4) {
                             Text("Already have an account?")
                                 .font(.callout)
-                                .foregroundStyle(Color("TargetWhite").opacity(0.8))
+                                .foregroundStyle(Color("TargetBlack").opacity(0.72))
 
                             NavigationLink(destination: LoginView()) {
                                 Text("Log in")

@@ -55,13 +55,13 @@ struct LoadingView: View {
                 VStack(spacing: 8) {
                     Text("TARGET-IT")
                         .font(.largeTitle.weight(.bold))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color("TargetBlack"))
                         .scaleEffect(titleScale)
                         .opacity(titleOpacity)
 
                     Text("Track subscriptions. Protect your budget.")
                         .font(.subheadline)
-                        .foregroundStyle(.brown.opacity(0.9))
+                        .foregroundStyle(Color("TargetBrown"))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
                         .scaleEffect(taglineScale)
@@ -70,7 +70,7 @@ struct LoadingView: View {
                 }
 
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .brown))
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color("TargetBrown")))
                     .scaleEffect(1.2)
                     .opacity(progressOpacity)
                     .padding(.top, 8)

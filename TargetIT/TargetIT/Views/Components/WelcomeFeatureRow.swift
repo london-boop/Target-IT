@@ -19,12 +19,12 @@ struct WelcomeFeatureRow: View {
 
             Text(text)
                 .font(.subheadline.weight(.medium))
-                .foregroundStyle(Color("TargetWhite"))
+                .foregroundStyle(Color("TargetBlack"))
 
             Spacer()
         }
         .padding(14)
-        .background(Color.white.opacity(0.08))
+        .background(Color.white.opacity(0.48))
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
