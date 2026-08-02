@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct DashboardView: View {
+    // Lets the dashboard ask the shell to replay the tour.
+    let onReplayTour: () -> Void
+
     private let subscriptions = DemoData.subscriptions
     private let goals = DemoData.goals
     private let reminders = DemoData.reminders
@@ -57,6 +60,17 @@ struct DashboardView: View {
                 .background(panelColor)
                 .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
 
+                // Replay Tour button gives presenters a quick way to start the walkthrough again.
+                Button(action: onReplayTour) {
+                    Text("Replay Interactive Tour")
+                        .font(.headline.weight(.semibold))
+                        .foregroundStyle(Color.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color("TargetBrown"))
+                        .cornerRadius(16)
+                }
+
                 // Reminder preview section.
                 VStack(alignment: .leading, spacing: 14) {
                     sectionTitle("Coming Up")
@@ -82,5 +96,5 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView()
+    DashboardView(onReplayTour: {})
 }

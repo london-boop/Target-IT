@@ -45,6 +45,9 @@ struct TourStepView: View {
                 .background(Color.white.opacity(0.96))
                 .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
 
+                // Demo user card helps the tour feel more like a real product walkthrough.
+                DemoAudienceCard()
+
                 // Detail rows explain the user value of the current feature.
                 VStack(spacing: 12) {
                     ForEach(step.detailRows, id: \.self) { row in
@@ -54,6 +57,36 @@ struct TourStepView: View {
             }
             .padding(24)
         }
+    }
+}
+
+// MARK: - Demo Audience Card
+// Shows the teenage-to-adult audience angle with the Kayla demo image.
+struct DemoAudienceCard: View {
+    var body: some View {
+        HStack(spacing: 14) {
+            Image("kaylaJones")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 70, height: 70)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Demo User: Kayla Jones")
+                    .font(.headline)
+                    .foregroundStyle(Color("TargetBlack"))
+
+                Text("Target-IT supports teenage to adult users who need a clearer way to manage subscriptions.")
+                    .font(.subheadline)
+                    .foregroundStyle(Color("TargetBrown"))
+            }
+
+            Spacer()
+        }
+        .padding(16)
+        .background(Color.white.opacity(0.96))
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
 
