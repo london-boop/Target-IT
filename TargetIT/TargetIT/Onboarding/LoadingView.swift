@@ -27,10 +27,22 @@ struct LoadingView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 24) {
+                // The logo needs a light surface behind it so the darker "IT"
+                // portion remains readable against the black splash background.
                 Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 180, height: 180)
+                    .frame(width: 220, height: 220)
+                    .padding(22)
+                    .background(
+                        RoundedRectangle(cornerRadius: 32, style: .continuous)
+                            .fill(Color.white.opacity(0.96))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 32, style: .continuous)
+                            .stroke(Color.brown.opacity(0.35), lineWidth: 1.5)
+                    )
+                    .shadow(color: .brown.opacity(0.18), radius: 16, x: 0, y: 10)
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
                     .accessibilityHidden(true)
