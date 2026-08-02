@@ -22,12 +22,18 @@ struct ContentView: View {
                 .ignoresSafeArea()
 
             if isShowingLoadingView {
-                LoadingView {
-                    withAnimation(.easeInOut(duration: 0.35)) {
-                        isShowingLoadingView = false
+                LoadingView()
+                    .transition(.opacity)
+                    .task {
+                        // The root view controls when the splash hands off to WelcomeView.
+                        // This keeps LoadingView simple and avoids callback/breakpoint confusion.
+                        try? await Task.sleep(nanoseconds: 2_400_000_000)
+                        guard !Task.isCancelled else { return }
+
+                        withAnimation(.easeInOut(duration: 0.35)) {
+                            isShowingLoadingView = false
+                        }
                     }
-                }
-                .transition(.opacity)
             } else {
                 WelcomeView()
                     .transition(.opacity)

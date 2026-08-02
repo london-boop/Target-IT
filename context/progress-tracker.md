@@ -128,7 +128,7 @@ Update this file after every meaningful implementation change.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
 - Student later reported a white-screen-only simulator launch, so the loading sequence was simplified to a more explicit `.task`-driven step order to make the splash more reliable at runtime.
 - Review feedback noted that `Task.sleep` cancellation should not be suppressed, so the loading sequence now exits cleanly when the SwiftUI task is cancelled.
-- Screenshot review shows the app paused in Xcode at `LoadingView.init(onFinished:)`, which suggests the simulator may be halted by the debugger/breakpoint state rather than the splash never rendering.
+- Screenshot review showed the app paused in Xcode at `LoadingView.init(onFinished:)`, so the remaining `onFinished` handoff logic was removed from `LoadingView` and moved back to `ContentView` to keep the splash simpler and avoid callback confusion.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.

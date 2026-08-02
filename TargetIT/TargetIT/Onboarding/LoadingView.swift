@@ -23,9 +23,6 @@ struct LoadingView: View {
     @State private var taglineOffset: CGFloat = 28
     @State private var progressOpacity: Double = 0.0
 
-    // Keep the splash short so it feels polished without slowing the pitch flow.
-    private let splashDuration: Double = 2.4
-
     var body: some View {
         ZStack {
             LinearGradient(
@@ -83,7 +80,7 @@ struct LoadingView: View {
         }
     }
 
-    // Runs the loading sequence in a clear, step-by-step order.
+    // Runs the loading animation sequence in a clear, step-by-step order.
     private func runLoadingSequence() async {
         guard !hasStartedAnimation else { return }
         hasStartedAnimation = true
@@ -97,10 +94,6 @@ struct LoadingView: View {
             taglineOpacity = 1.0
             taglineOffset = 0
             progressOpacity = 1.0
-
-            guard await sleepUnlessCancelled(nanoseconds: 1_200_000_000) else { return }
-            guard !Task.isCancelled else { return }
-            onFinished()
             return
         }
 
@@ -118,7 +111,7 @@ struct LoadingView: View {
 
         guard await sleepUnlessCancelled(nanoseconds: 260_000_000) else { return }
 
-        withAnimation(.easeOut(duration: 0.4)) {
+        withAnimation(.easeOut(duration: 0.45)) {
             taglineScale = 1.0
             taglineOpacity = 1.0
             taglineOffset = 0
@@ -129,10 +122,6 @@ struct LoadingView: View {
         withAnimation(.easeIn(duration: 0.25)) {
             progressOpacity = 1.0
         }
-
-        guard await sleepUnlessCancelled(nanoseconds: UInt64((splashDuration - 1.23) * 1_000_000_000)) else { return }
-        guard !Task.isCancelled else { return }
-        onFinished()
     }
 
     // Sleeps for a duration and exits early if the SwiftUI task is cancelled.
