@@ -85,6 +85,7 @@ Update this file after every meaningful implementation change.
 - Screenshot review showed Xcode was paused in the debugger at `LoadingView`, so the white-screen symptom was partly caused by debug pause state rather than the view never loading
 - Shifted the current auth entry implementation from placeholders to real local SwiftData sign-up and login screens
 - Reworked local auth so passwords now use per-user salts with PBKDF2, and the demo image is only assigned intentionally for the Kayla Jones demo user instead of every account
+- Added `kaylaJones` to `Assets.xcassets` as a real image asset so the local demo user can reference it in the app
 
 **Phase 3 Correction / Current Direction:**
 - Tone clarified that the first real destination after `LoadingView` must be `WelcomeView`
