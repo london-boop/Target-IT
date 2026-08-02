@@ -8,39 +8,88 @@
 import SwiftUI
 
 struct LoadingView: View {
-    var body: some View {
-        
-        Image("logo")
-              .resizable()
-              .scaledToFit()
-              .frame(width: 600, height: 600)
-              .padding()
-              .background(Color.white)
-              .cornerRadius(20)
-          Text("Loading...")
-              
-    }
-    //
-    
-    @State private var logoScale: CGFloat = 0.8
+    // This closure lets the app decide what happens after the splash finishes.
+    let onFinished: () -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    // These state values drive the simple branded entrance animation.
+    @State private var logoScale: CGFloat = 0.94
     @State private var logoOpacity: Double = 0.0
-    @State private var textOpacity: Double = 0.0
-    @State private var pillOffset: CGFloat = 0.8
-    // Logo
-    
-    
-    // Animation Timing
-    private let logoAnimationDelay: Double = 0.2
-    private let textAnimationDelay: Double = 0.4
-    private let pillsStartDelay: Double = 1.0
-    private let totalDuration: Double = 1.8
-    // Animation methood
-    private func performAnimation() {
-        withAnimation(.spring(response: 0.4, dampingFraction: 0.7).delay(logoAnimationDelay)) {
-            logoScale = 1.0
-            logoOpacity = 1.0
+    @State private var contentOpacity: Double = 0.0
+
+    // Keep the splash short so it feels polished without slowing the pitch flow.
+    private let splashDuration: Double = 1.8
+
+    var body: some View {
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+
+            VStack(spacing: 24) {
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 180, height: 180)
+                    .scaleEffect(logoScale)
+                    .opacity(logoOpacity)
+                    .accessibilityHidden(true)
+
+                VStack(spacing: 8) {
+                    Text("TARGET-IT")
+                        .font(.largeTitle.weight(.bold))
+                        .foregroundStyle(.white)
+
+                    Text("Track subscriptions. Protect your budget.")
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.78))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 24)
+                }
+                .opacity(contentOpacity)
+
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .brown))
+                    .scaleEffect(1.2)
+                    .padding(.top, 8)
+                    .accessibilityLabel("Loading Target-IT")
+                    .accessibilityHint("Please wait while the app opens")
             }
+            .padding(32)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Target-IT loading screen")
+        .onAppear {
+            startAnimation()
+            finishSplashAfterDelay()
         }
     }
-    #Preview {
+
+    private func startAnimation() {
+        if reduceMotion {
+            logoScale = 1.0
+            logoOpacity = 1.0
+            contentOpacity = 1.0
+            return
+        }
+
+        withAnimation(.easeOut(duration: 0.45)) {
+            logoScale = 1.0
+            logoOpacity = 1.0
+        }
+
+        withAnimation(.easeIn(duration: 0.35).delay(0.18)) {
+            contentOpacity = 1.0
+        }
     }
+
+    private func finishSplashAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + splashDuration) {
+            onFinished()
+        }
+    }
+}
+
+#Preview {
+    LoadingView(onFinished: {})
+}
