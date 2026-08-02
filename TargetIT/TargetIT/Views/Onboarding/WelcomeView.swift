@@ -9,9 +9,13 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    // Dark finance-style gradient inspired by the prototype PDF.
+    // Match the LoadingView background so onboarding feels visually continuous.
+    // The page starts with a light finance-friendly gradient and uses darker cards on top.
     private let gradientBackground = LinearGradient(
-        colors: [Color("TargetBlack"), Color("TargetBrown")],
+        colors: [
+            Color("TargetWhite"),
+            Color("TargetBrown").opacity(0.28)
+        ],
         startPoint: .top,
         endPoint: .bottom
     )

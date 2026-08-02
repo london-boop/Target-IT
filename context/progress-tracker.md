@@ -71,6 +71,8 @@ Update this file after every meaningful implementation change.
 - Split the implementation into separate onboarding files, main shell files, reusable components, models, and utilities so the structure now matches the teaching pattern more closely
 - Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
+- Updated `WelcomeView` to use the same light gradient background as `LoadingView` so onboarding stays visually consistent from splash to welcome
+- Screenshot review showed Xcode was paused in the debugger at `LoadingView`, so the white-screen symptom was partly caused by debug pause state rather than the view never loading
 
 **Phase 3 Correction / Current Direction:**
 - Tone clarified that the first real destination after `LoadingView` must be `WelcomeView`
@@ -125,6 +127,7 @@ Update this file after every meaningful implementation change.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
 - Student later reported a white-screen-only simulator launch, so the loading sequence was simplified to a more explicit `.task`-driven step order to make the splash more reliable at runtime.
 - Review feedback noted that `Task.sleep` cancellation should not be suppressed, so the loading sequence now exits cleanly when the SwiftUI task is cancelled.
+- Screenshot review shows the app paused in Xcode at `LoadingView.init(onFinished:)`, which suggests the simulator may be halted by the debugger/breakpoint state rather than the splash never rendering.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.
