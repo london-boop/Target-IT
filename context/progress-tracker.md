@@ -64,6 +64,7 @@ Update this file after every meaningful implementation change.
 - Improved splash logo readability by moving the loading screen to a light top-to-bottom gradient so the darker `IT` portion stays visible
 - Removed the extra white logo card/padding so the logo can stand on its own
 - Increased the actual splash logo size so the brand mark reads more clearly during launch
+- Added staged loading animation so content fades in with delay in this order: logo → company name → tagline, followed by the progress indicator
 
 ---
 
