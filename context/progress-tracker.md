@@ -70,6 +70,7 @@ Update this file after every meaningful implementation change.
 - Tone flagged that the current one-file implementation is still not aligned with how the interns were taught, so the next correction is to split it into separate files by screen/component/model
 - Split the implementation into separate onboarding files, main shell files, reusable components, models, and utilities so the structure now matches the teaching pattern more closely
 - Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
+- Updated `ContentView.swift` to honor Reduce Motion during the LoadingView → WelcomeView handoff by skipping the fade animation when motion reduction is enabled
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
 - Corrected onboarding contrast so the light `LoadingView`/`WelcomeView` background uses darker title, tagline, and supporting text, keeping the splash and welcome screens visually consistent
 - Updated `WelcomeView` to use the same light gradient background as `LoadingView` so onboarding stays visually consistent from splash to welcome
@@ -82,6 +83,7 @@ Update this file after every meaningful implementation change.
 - The current shell exists behind onboarding as a spike, but the onboarding-first flow is now the implemented root path
 - Tone clarified that the Prototype PDF is the UI guideline for the MVP, so implementation should stay visually consistent with the PDF
 - Tone clarified that the code style should stay closer to how the interns were taught in the other cohort projects and include notes explaining meaningful code blocks
+- Tone emphasized that **simple is better** for this team: write for teenage interns, some coding for the first time, and avoid coding it like a senior-dev-only implementation
 
 ---
 
@@ -126,9 +128,8 @@ Update this file after every meaningful implementation change.
 
 - `ContentView.swift` now follows an onboarding-first root flow: `LoadingView` → `WelcomeView` → placeholder tour/auth stages → `MainTabView`.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
-- Student later reported a white-screen-only simulator launch, so the loading sequence was simplified to a more explicit `.task`-driven step order to make the splash more reliable at runtime.
-- Review feedback noted that `Task.sleep` cancellation should not be suppressed, so the loading sequence now exits cleanly when the SwiftUI task is cancelled.
-- Screenshot review showed the app paused in Xcode at `LoadingView.init(onFinished:)`, so the remaining `onFinished` handoff logic was removed from `LoadingView` and moved back to `ContentView` to keep the splash simpler and avoid callback confusion.
+- Student later reported a white-screen-only simulator launch, so the loading sequence was simplified and then refactored again to match the much simpler splash pattern used in LifeStarter.
+- Screenshot review showed the app paused in Xcode at `LoadingView.init(onFinished:)`, so the remaining callback-style handoff logic was removed from `LoadingView` and the splash now uses a simple `onAppear` animation pattern while `ContentView` handles the delayed transition to `WelcomeView`.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.

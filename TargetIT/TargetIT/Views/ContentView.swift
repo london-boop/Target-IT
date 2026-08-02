@@ -14,6 +14,9 @@ struct ContentView: View {
     // Controls whether the splash/loading screen is still visible.
     @State private var isShowingLoadingView = true
 
+    // Accessibility: respect the user's motion preference during screen handoff.
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     var body: some View {
         ZStack {
             // Keep a full-screen background behind both phases so the app
@@ -24,14 +27,17 @@ struct ContentView: View {
             if isShowingLoadingView {
                 LoadingView()
                     .transition(.opacity)
-                    .task {
+                    .onAppear {
                         // The root view controls when the splash hands off to WelcomeView.
-                        // This keeps LoadingView simple and avoids callback/breakpoint confusion.
-                        try? await Task.sleep(nanoseconds: 2_400_000_000)
-                        guard !Task.isCancelled else { return }
-
-                        withAnimation(.easeInOut(duration: 0.35)) {
-                            isShowingLoadingView = false
+                        // This keeps LoadingView simple and follows the same style used in the other projects.
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+                            if reduceMotion {
+                                isShowingLoadingView = false
+                            } else {
+                                withAnimation(.easeInOut(duration: 0.35)) {
+                                    isShowingLoadingView = false
+                                }
+                            }
                         }
                     }
             } else {

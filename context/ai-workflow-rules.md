@@ -16,6 +16,8 @@ Build Target-IT incrementally using a spec-driven workflow. The context files de
 - Preserve the team's own visual identity instead of defaulting to patterns from the other cohort apps
 - Use the Prototype PDF as the main UI guide for the MVP; do not drift into unplanned styling that conflicts with the PDF
 - Match the teaching style used in the other cohort Swift projects: prefer straightforward `NavigationStack` / `NavigationLink` flows before introducing more advanced routing patterns
+- **Simple is better** for this project: avoid clever abstractions, advanced routing, or architecture the interns have not been taught yet
+- Write the code as if it is for teenage first-time coders to read and extend successfully
 - Add notes/comments that explain what meaningful code blocks do so interns can follow the implementation
 
 ## Recommended Phase Order
