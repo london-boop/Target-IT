@@ -133,6 +133,7 @@ Update this file after every meaningful implementation change.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
 - Student later reported a white-screen-only simulator launch, so the loading sequence was simplified and then refactored again to match the much simpler splash pattern used in LifeStarter.
 - Screenshot review showed the app paused in Xcode at `LoadingView.init(onFinished:)`, so the remaining callback-style handoff logic was removed from `LoadingView` and the splash now uses a simple `onAppear` animation pattern while `ContentView` handles the delayed transition to `WelcomeView`.
+- Removed the student-specific file breakpoints that were still enabled on lines 9 and 11 of `LoadingView.swift`, since those were causing the simulator to pause under LLDB during launch.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.
