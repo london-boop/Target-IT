@@ -42,6 +42,8 @@ struct AlertsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(panelColor)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("What needs attention, \(reminderCountText), \(notificationCountText)")
 
                 VStack(alignment: .leading, spacing: 14) {
                     Text("Upcoming Reminders")

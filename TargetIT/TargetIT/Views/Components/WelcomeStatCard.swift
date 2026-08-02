@@ -29,5 +29,7 @@ struct WelcomeStatCard: View {
                 .stroke(Color("TargetBrown").opacity(0.18), lineWidth: 1)
         )
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title), \(value)")
     }
 }

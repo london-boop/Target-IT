@@ -43,7 +43,7 @@ struct LoadingView: View {
                 Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 380, height: 380)
+                    .frame(maxWidth: 380, maxHeight: 380)
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
                     .accessibilityHidden(true)
@@ -52,6 +52,8 @@ struct LoadingView: View {
                 Text("TARGET-IT")
                     .font(.largeTitle.weight(.bold))
                     .foregroundStyle(Color("TargetBlack"))
+                    .multilineTextAlignment(.center)
+                    .minimumScaleFactor(0.75)
                     .scaleEffect(titleScale)
                     .opacity(titleOpacity)
 
@@ -60,6 +62,7 @@ struct LoadingView: View {
                     .font(.subheadline)
                     .foregroundStyle(Color("TargetBrown"))
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, 24)
                     .scaleEffect(taglineScale)
                     .opacity(taglineOpacity)
@@ -78,6 +81,7 @@ struct LoadingView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Target-IT loading screen")
+        .accessibilityAddTraits(.isStaticText)
         .task {
             await runLoadingSequence()
         }

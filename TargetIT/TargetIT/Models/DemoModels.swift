@@ -58,7 +58,7 @@ enum SubscriptionStatus {
         case .trialEnding:
             return Color("Gold")
         case .canceled:
-            return Color("TargetWhite")
+            return Color("TargetBlack")
         }
     }
 
@@ -70,7 +70,7 @@ enum SubscriptionStatus {
         case .trialEnding:
             return Color("Gold").opacity(0.18)
         case .canceled:
-            return Color("TargetWhite").opacity(0.14)
+            return Color("TargetBrown").opacity(0.14)
         }
     }
 
@@ -263,6 +263,17 @@ enum DemoData {
                 "Review renewal warnings quickly",
                 "See savings activity in one feed",
                 "Support clear VoiceOver summaries"
+            ]
+        ),
+        TourStep(
+            title: "VoiceOver-First Billing Awareness",
+            subtitle: "Hear subscription status, renewal timing, and savings progress with clear spoken summaries.",
+            symbol: "speaker.wave.2.fill",
+            accentText: "Accessibility built into every important billing moment",
+            detailRows: [
+                "VoiceOver can announce subscription price, status, and renewal dates clearly",
+                "Savings goals describe progress in plain language instead of color alone",
+                "Reminder center items pair icons with readable text for easier scanning"
             ]
         )
     ]

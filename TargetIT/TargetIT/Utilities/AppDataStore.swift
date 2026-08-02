@@ -17,11 +17,20 @@ final class AppDataStore: ObservableObject {
     @Published var reminders: [BillingReminder]
     @Published var notifications: [NotificationItem]
 
+    // Default initializer pulls seeded demo data from the main-actor context.
+    init() {
+        self.subscriptions = DemoData.subscriptions
+        self.goals = DemoData.goals
+        self.reminders = DemoData.reminders
+        self.notifications = DemoData.notifications
+    }
+
+    // Secondary initializer keeps previews and future tests flexible.
     init(
-        subscriptions: [SubscriptionRecord] = DemoData.subscriptions,
-        goals: [SavingsGoal] = DemoData.goals,
-        reminders: [BillingReminder] = DemoData.reminders,
-        notifications: [NotificationItem] = DemoData.notifications
+        subscriptions: [SubscriptionRecord],
+        goals: [SavingsGoal],
+        reminders: [BillingReminder],
+        notifications: [NotificationItem]
     ) {
         self.subscriptions = subscriptions
         self.goals = goals
