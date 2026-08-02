@@ -23,9 +23,13 @@ struct LoadingView: View {
     // Keep the splash short so it feels polished without slowing the pitch flow.
     private let splashDuration: TimeInterval = 2.4
 
-    // Light gradient background used for both LoadingView and WelcomeView.
+    // Tone-approved onboarding background.
+    // Keep the top clearly white and let the bottom fade into a very light brown.
     private let gradientBackground = LinearGradient(
-        colors: [Color("TargetWhite"), Color("TargetBrown").opacity(0.28)],
+        colors: [
+            Color.white,
+            Color(.sRGB, red: 0.94, green: 0.91, blue: 0.88, opacity: 1.0)
+        ],
         startPoint: .top,
         endPoint: .bottom
     )
@@ -88,7 +92,7 @@ struct LoadingView: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color("TargetBlack").opacity(0.15))
+                    .fill(Color("TargetBrown").opacity(0.18))
                     .frame(height: 8)
 
                 RoundedRectangle(cornerRadius: 4)

@@ -10,11 +10,11 @@ import SwiftUI
 
 struct WelcomeView: View {
     // Match the LoadingView background so onboarding feels visually continuous.
-    // The page starts with a light finance-friendly gradient and uses darker cards on top.
+    // Keep the top white and the bottom a very light brown, just like the splash.
     private let gradientBackground = LinearGradient(
         colors: [
-            Color("TargetWhite"),
-            Color("TargetBrown").opacity(0.28)
+            Color.white,
+            Color(.sRGB, red: 0.94, green: 0.91, blue: 0.88, opacity: 1.0)
         ],
         startPoint: .top,
         endPoint: .bottom

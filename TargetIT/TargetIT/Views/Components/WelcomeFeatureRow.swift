@@ -24,7 +24,11 @@ struct WelcomeFeatureRow: View {
             Spacer()
         }
         .padding(14)
-        .background(Color.white.opacity(0.48))
+        .background(Color.white.opacity(0.92))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Color("TargetBrown").opacity(0.16), lineWidth: 1)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }

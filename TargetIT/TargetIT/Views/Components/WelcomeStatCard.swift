@@ -23,7 +23,11 @@ struct WelcomeStatCard: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(Color.white.opacity(0.48))
+        .background(Color.white.opacity(0.92))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(Color("TargetBrown").opacity(0.18), lineWidth: 1)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
