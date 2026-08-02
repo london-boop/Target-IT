@@ -30,6 +30,14 @@
 
 Planned MVP entities:
 
+- `User`
+  - id
+  - fullName
+  - email
+  - passwordHash
+  - profileImageName (optional)
+  - createdAt
+  - lastLoginAt
 - `SubscriptionRecord`
   - name
   - monthlyCost
@@ -68,12 +76,15 @@ Use only for lightweight app state such as:
 - hasSeenInteractiveTour
 - preferred demo entry state
 - last-selected tab if helpful
+- active local user ID for MVP auth session state
 
 ## Auth and Access Model
 
 - **No external auth for MVP**
 - Sign Up is the primary new-user entry path after the interactive tour
 - Login must be available from the Sign Up experience for returning users
+- User accounts are stored locally with SwiftData
+- Active-user session state is stored locally with `UserDefaults` / lightweight session helpers
 - The app behaves like a personal finance assistant on one device during MVP
 - If profile state is needed, keep it local and lightweight
 
@@ -206,6 +217,7 @@ Supporting architecture expectations:
 | Interactive tour as core feature | Decided | Required for pitch/demo use |
 | Welcome before tour | Decided | Tone clarified WelcomeView is the real app entry after loading |
 | Sign Up with Login path | Decided | Returning users need a direct auth route |
+| Local SwiftData auth | Decided | MVP should be a working app without backend dependencies |
 | Tab-based main shell | Active | Matches the prototype navigation language |
 | VoiceOver-first billing awareness | Decided | Best Apple accessibility fit for the product |
 | Simulated cancellation and savings routing | Decided | Keeps claims believable without backend integrations |

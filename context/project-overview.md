@@ -41,12 +41,13 @@ The team will also use an **interactive tour** to walk judges or stakeholders th
 3. User taps **Get Started** to begin the **interactive tour**.
 4. Interactive tour explains the problem, solution, and main app features.
 5. Tour continues into **Sign Up** for new users.
-6. Sign Up also offers a path to **Login** for returning users.
-7. After onboarding/auth entry, user reaches the main app experience and sees high-level subscription totals and upcoming billing activity.
-8. User opens the subscription area to review recurring services and statuses.
-9. User simulates canceling an unwanted subscription.
-10. App shows that the canceled amount can be rerouted into a savings goal.
-11. User checks reminders / notifications for upcoming renewals, trial expirations, and savings milestones.
+6. Sign Up uses local SwiftData account creation and offers a path to **Login** for returning users.
+7. Login authenticates against locally stored user accounts on the device.
+8. After onboarding/auth entry, user reaches the main app experience and sees high-level subscription totals and upcoming billing activity.
+9. User opens the subscription area to review recurring services and statuses.
+10. User simulates canceling an unwanted subscription.
+11. App shows that the canceled amount can be rerouted into a savings goal.
+12. User checks reminders / notifications for upcoming renewals, trial expirations, and savings milestones.
 
 ## Features
 
@@ -58,6 +59,15 @@ The team will also use an **interactive tour** to walk judges or stakeholders th
 - Clear product education before deeper navigation
 - Restartable tour from within the app
 - Sign Up flow with Login path for returning users
+- Local SwiftData auth entry for new and returning users
+
+### Local Authentication
+
+- Local account creation stored on the device with SwiftData
+- Local login using saved credentials on the device
+- Active-user session persistence using lightweight local storage
+- No backend auth, no cloud auth, and no external API dependency for MVP
+- Demo-friendly seeded profile support, including local image assets like `kaylaJones.png` where helpful
 
 ### Subscription Tracking
 
@@ -95,6 +105,7 @@ The team will also use an **interactive tour** to walk judges or stakeholders th
 - Team-specific visual identity rather than reusing another project's presentation style
 - Local-only data model and seeded demo content
 - Interactive tour for presenters
+- Local SwiftData sign-up and login flow
 - Dashboard, subscriptions, savings, reminders, and notification center flows
 - Simulated cancel actions and savings rerouting
 - Accessibility-first implementation for the core flows

@@ -54,6 +54,7 @@ Update this file after every meaningful implementation change.
 - Split the implementation into separate files/folders the way Tone taught the interns
 - Restore `WelcomeView` as the real post-loading entry point
 - Make `WelcomeView` and `InteractiveTourView` more visually consistent with the Prototype PDF
+- Add real local SwiftData auth entry in Phase 3
 - Keep the implementation style aligned with how Tone taught the interns
 - Log progress after each meaningful step per Tone's instruction
 
@@ -69,6 +70,7 @@ Update this file after every meaningful implementation change.
 - Added explanatory comments throughout the implementation so interns can understand what each code block does
 - Tone flagged that the current one-file implementation is still not aligned with how the interns were taught, so the next correction is to split it into separate files by screen/component/model
 - Split the implementation into separate onboarding files, main shell files, reusable components, models, and utilities so the structure now matches the teaching pattern more closely
+- Tone approved adding real local SwiftData authentication to Phase 3 so the MVP is a working app rather than placeholder-only auth
 - Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
 - Updated `ContentView.swift` to honor Reduce Motion during the LoadingView → WelcomeView handoff by skipping the fade animation when motion reduction is enabled
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
@@ -178,6 +180,7 @@ Update this file after every meaningful implementation change.
 ### Phase 3 — App Shell & Local Data Foundation
 - 🔄 Rework shell implementation around the corrected onboarding flow
 - ✅ Seed local subscription, savings, and reminder data
+- 🔄 Implement local SwiftData sign-up and login flow
 - 🔄 Establish core screen structure after Welcome / Tour / Auth entry is in place
 
 ### Phase 4 — Interactive Tour
