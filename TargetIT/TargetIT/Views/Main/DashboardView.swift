@@ -36,13 +36,13 @@ struct DashboardView: View {
             VStack(alignment: .leading, spacing: 20) {
                 Text("TARGET-IT")
                     .font(.title.weight(.bold))
-                    .foregroundStyle(Color("TargetWhite"))
+                    .foregroundStyle(Color("TargetBlack"))
 
                 // Main summary card for monthly subscription totals.
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Monthly Overview")
                         .font(.headline)
-                        .foregroundStyle(Color("TargetWhite").opacity(0.85))
+                        .foregroundStyle(Color("TargetBrown"))
 
                     Text(monthlySpend.currencyText)
                         .font(.system(size: 40, weight: .bold, design: .rounded))
@@ -50,7 +50,7 @@ struct DashboardView: View {
 
                     Text("\(activeSubscriptionsCount) active subscriptions · \(totalSaved.currencyText) currently saved from canceled services")
                         .font(.subheadline)
-                        .foregroundStyle(Color("TargetWhite").opacity(0.74))
+                        .foregroundStyle(Color("TargetBlack").opacity(0.72))
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -77,7 +77,7 @@ struct DashboardView: View {
             }
             .padding(20)
         }
-        .background(Color("TargetBlack").ignoresSafeArea())
+        .background(Color.white.ignoresSafeArea())
     }
 }
 

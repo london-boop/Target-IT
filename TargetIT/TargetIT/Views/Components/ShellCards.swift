@@ -18,11 +18,11 @@ struct SubscriptionCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(subscription.name)
                         .font(.headline)
-                        .foregroundStyle(Color("TargetWhite"))
+                        .foregroundStyle(Color("TargetBlack"))
 
                     Text(subscription.category)
                         .font(.subheadline)
-                        .foregroundStyle(Color("TargetWhite").opacity(0.65))
+                        .foregroundStyle(Color("TargetBrown"))
                 }
 
                 Spacer()
@@ -39,7 +39,7 @@ struct SubscriptionCard: View {
 
                 Text("Renews \(subscription.nextBillingDate.shortDateText)")
                     .font(.footnote)
-                    .foregroundStyle(Color("TargetWhite").opacity(0.7))
+                    .foregroundStyle(Color("TargetBlack").opacity(0.68))
             }
         }
         .padding(18)
@@ -67,11 +67,11 @@ struct SavingsGoalCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(goal.title)
                         .font(.headline)
-                        .foregroundStyle(Color("TargetWhite"))
+                        .foregroundStyle(Color("TargetBlack"))
 
                     Text("Target by \(goal.targetDate.shortDateText)")
                         .font(.subheadline)
-                        .foregroundStyle(Color("TargetWhite").opacity(0.65))
+                        .foregroundStyle(Color("TargetBrown"))
                 }
 
                 Spacer()
@@ -88,7 +88,7 @@ struct SavingsGoalCard: View {
 
             Text("\(goal.currentAmount.currencyText) of \(goal.targetAmount.currencyText)")
                 .font(.footnote)
-                .foregroundStyle(Color("TargetWhite").opacity(0.72))
+                .foregroundStyle(Color("TargetBlack").opacity(0.68))
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -112,11 +112,11 @@ struct ReminderCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(reminder.title)
                     .font(.headline)
-                    .foregroundStyle(Color("TargetWhite"))
+                    .foregroundStyle(Color("TargetBlack"))
 
                 Text("\(reminder.amount.currencyText) · \(reminder.dueDate.shortDateText)")
                     .font(.subheadline)
-                    .foregroundStyle(Color("TargetWhite").opacity(0.7))
+                    .foregroundStyle(Color("TargetBrown"))
             }
 
             Spacer()
@@ -138,18 +138,18 @@ struct NotificationCard: View {
             HStack {
                 Text(notification.title)
                     .font(.headline)
-                    .foregroundStyle(Color("TargetWhite"))
+                    .foregroundStyle(Color("TargetBlack"))
 
                 Spacer()
 
                 Text(notification.timestampLabel)
                     .font(.footnote)
-                    .foregroundStyle(Color("TargetWhite").opacity(0.6))
+                    .foregroundStyle(Color("TargetBlack").opacity(0.6))
             }
 
             Text(notification.message)
                 .font(.subheadline)
-                .foregroundStyle(Color("TargetWhite").opacity(0.78))
+                .foregroundStyle(Color("TargetBlack").opacity(0.78))
         }
         .padding(18)
         .background(panelColor)

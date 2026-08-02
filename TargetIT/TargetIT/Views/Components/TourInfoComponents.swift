@@ -42,7 +42,7 @@ struct TourStepView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(20)
-                .background(Color.white.opacity(0.92))
+                .background(Color.white.opacity(0.96))
                 .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
 
                 // Detail rows explain the user value of the current feature.
@@ -75,7 +75,7 @@ struct TourDetailRow: View {
             Spacer()
         }
         .padding(16)
-        .background(Color.white.opacity(0.92))
+        .background(Color.white.opacity(0.96))
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }

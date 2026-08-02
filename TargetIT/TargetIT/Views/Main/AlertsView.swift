@@ -15,7 +15,7 @@ struct AlertsView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Alerts")
                     .font(.title2.weight(.bold))
-                    .foregroundStyle(Color("TargetWhite"))
+                    .foregroundStyle(Color("TargetBlack"))
 
                 ForEach(notifications) { notification in
                     NotificationCard(notification: notification)
@@ -23,7 +23,7 @@ struct AlertsView: View {
             }
             .padding(20)
         }
-        .background(Color("TargetBlack").ignoresSafeArea())
+        .background(Color.white.ignoresSafeArea())
     }
 }
 

@@ -18,19 +18,9 @@ struct InteractiveTourView: View {
     // Core feature pages pulled from the prototype PDF direction.
     private let steps = DemoData.tourSteps
 
-    // Match the lighter onboarding background used by LoadingView and WelcomeView.
-    private let gradientBackground = LinearGradient(
-        colors: [
-            Color.white,
-            Color(.sRGB, red: 0.94, green: 0.91, blue: 0.88, opacity: 1.0)
-        ],
-        startPoint: .top,
-        endPoint: .bottom
-    )
-
     var body: some View {
         ZStack {
-            gradientBackground
+            Color.white
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -38,7 +28,7 @@ struct InteractiveTourView: View {
                 HStack {
                     Text("Step \(currentStep + 1) of \(steps.count)")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                        .foregroundStyle(Color("TargetBrown"))
 
                     Spacer()
 
@@ -47,7 +37,7 @@ struct InteractiveTourView: View {
                             currentStep = steps.count - 1
                         }
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color("Gold"))
+                        .foregroundStyle(Color("TargetBrown"))
                     }
                 }
                 .padding(.horizontal, 24)
@@ -67,7 +57,7 @@ struct InteractiveTourView: View {
                 HStack(spacing: 8) {
                     ForEach(0..<steps.count, id: \.self) { index in
                         Capsule()
-                            .fill(index == currentStep ? Color("Gold") : Color("TargetBrown").opacity(0.18))
+                            .fill(index == currentStep ? Color("TargetBrown") : Color("TargetBrown").opacity(0.18))
                             .frame(width: index == currentStep ? 28 : 10, height: 10)
                     }
                 }
@@ -84,11 +74,11 @@ struct InteractiveTourView: View {
                             Text("Back")
                         }
                         .font(.headline)
-                        .foregroundStyle(currentStep == 0 ? Color("TargetBlack").opacity(0.35) : Color("Gold"))
+                        .foregroundStyle(currentStep == 0 ? Color("TargetBrown").opacity(0.35) : Color("TargetBrown"))
                         .frame(maxWidth: .infinity, minHeight: 54)
                         .background(
                             RoundedRectangle(cornerRadius: 16)
-                                .stroke(currentStep == 0 ? Color("TargetBrown").opacity(0.16) : Color("Gold"), lineWidth: 1.4)
+                                .stroke(currentStep == 0 ? Color("TargetBrown").opacity(0.16) : Color("TargetBrown"), lineWidth: 1.4)
                         )
                     }
                     .disabled(currentStep == 0)
@@ -99,12 +89,12 @@ struct InteractiveTourView: View {
                                 Text("Continue")
                                 Image(systemName: "arrow.right.circle.fill")
                             }
-                            .font(.headline)
-                            .foregroundStyle(Color("TargetBlack"))
+                            .font(.headline.weight(.semibold))
+                            .foregroundStyle(Color.white)
                             .frame(maxWidth: .infinity, minHeight: 54)
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color("Gold"))
+                                    .fill(Color("TargetBrown"))
                             )
                         }
                     } else {
@@ -113,12 +103,12 @@ struct InteractiveTourView: View {
                                 Text("Next")
                                 Image(systemName: "chevron.right")
                             }
-                            .font(.headline)
-                            .foregroundStyle(Color("TargetBlack"))
+                            .font(.headline.weight(.semibold))
+                            .foregroundStyle(Color.white)
                             .frame(maxWidth: .infinity, minHeight: 54)
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color("Gold"))
+                                    .fill(Color("TargetBrown"))
                             )
                         }
                     }

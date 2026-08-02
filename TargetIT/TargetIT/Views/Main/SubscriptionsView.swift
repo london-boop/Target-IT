@@ -15,7 +15,7 @@ struct SubscriptionsView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Subscriptions")
                     .font(.title2.weight(.bold))
-                    .foregroundStyle(Color("TargetWhite"))
+                    .foregroundStyle(Color("TargetBlack"))
 
                 ForEach(subscriptions) { subscription in
                     SubscriptionCard(subscription: subscription)
@@ -23,7 +23,7 @@ struct SubscriptionsView: View {
             }
             .padding(20)
         }
-        .background(Color("TargetBlack").ignoresSafeArea())
+        .background(Color.white.ignoresSafeArea())
     }
 }
 

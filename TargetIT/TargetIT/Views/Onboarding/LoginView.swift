@@ -11,15 +11,8 @@ import SwiftUI
 struct LoginView: View {
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color.white,
-                    Color(.sRGB, red: 0.94, green: 0.91, blue: 0.88, opacity: 1.0)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Color.white
+                .ignoresSafeArea()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
@@ -39,10 +32,10 @@ struct LoginView: View {
                     NavigationLink(destination: MainTabView()) {
                         Text("Log in to App")
                             .font(.headline.weight(.semibold))
-                            .foregroundStyle(Color("TargetBlack"))
+                            .foregroundStyle(Color.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
-                            .background(Color("Gold"))
+                            .background(Color("TargetBrown"))
                             .cornerRadius(16)
                     }
 

@@ -76,6 +76,8 @@ Update this file after every meaningful implementation change.
 - Corrected onboarding contrast so the light `LoadingView`/`WelcomeView` background uses darker title, tagline, and supporting text, keeping the splash and welcome screens visually consistent
 - Restored `LoadingView` to the earlier larger-logo, staggered-animation version with the horizontal tagline entrance that Tone explicitly called back to
 - Reapplied and clarified the exact shared onboarding background direction: a white-to-light-brown `LinearGradient` from top to bottom on both `LoadingView` and `WelcomeView`
+- Corrected the rest of the app flow so only `LoadingView` and `WelcomeView` keep the light gradient, while the tour, auth placeholders, and shell screens use white backgrounds instead
+- Standardized current primary buttons to use a brown background with semibold white text
 - Tightened the onboarding gradient again so the top stays clearly white and the bottom only shifts into a very light brown, matching the student MacBook screenshot more closely
 - Adjusted welcome cards to sit on lighter surfaces with subtle brown borders so the page matches the prototype tone more closely
 - Screenshot review showed Xcode was paused in the debugger at `LoadingView`, so the white-screen symptom was partly caused by debug pause state rather than the view never loading

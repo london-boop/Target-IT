@@ -15,7 +15,7 @@ struct SavingsView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Savings Hub")
                     .font(.title2.weight(.bold))
-                    .foregroundStyle(Color("TargetWhite"))
+                    .foregroundStyle(Color("TargetBlack"))
 
                 ForEach(goals) { goal in
                     SavingsGoalCard(goal: goal)
@@ -23,7 +23,7 @@ struct SavingsView: View {
             }
             .padding(20)
         }
-        .background(Color("TargetBlack").ignoresSafeArea())
+        .background(Color.white.ignoresSafeArea())
     }
 }
 
