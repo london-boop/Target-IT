@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AlertsView: View {
-    private let notifications = DemoData.notifications
+    @EnvironmentObject private var appDataStore: AppDataStore
 
     var body: some View {
         ScrollView {
@@ -17,7 +17,7 @@ struct AlertsView: View {
                     .font(.title2.weight(.bold))
                     .foregroundStyle(Color("TargetBlack"))
 
-                ForEach(notifications) { notification in
+                ForEach(appDataStore.notifications) { notification in
                     NotificationCard(notification: notification)
                 }
             }

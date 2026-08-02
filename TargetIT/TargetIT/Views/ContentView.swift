@@ -53,7 +53,7 @@ struct ContentView: View {
                         }
                     }
             } else if activeUser != nil {
-                MainTabView()
+                AppRootShellView()
                     .transition(.opacity)
             } else {
                 WelcomeView()
