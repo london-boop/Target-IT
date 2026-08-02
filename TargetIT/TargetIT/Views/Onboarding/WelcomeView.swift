@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     // Match the LoadingView background so onboarding feels visually continuous.
-    // Keep the top white and the bottom a very light brown, just like the splash.
+    // Keep the top white and let the bottom fade into a very light brown.
     private let gradientBackground = LinearGradient(
         colors: [
             Color.white,

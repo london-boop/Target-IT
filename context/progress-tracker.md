@@ -73,6 +73,7 @@ Update this file after every meaningful implementation change.
 - Updated `ContentView.swift` to honor Reduce Motion during the LoadingView → WelcomeView handoff by skipping the fade animation when motion reduction is enabled
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
 - Corrected onboarding contrast so the light `LoadingView`/`WelcomeView` background uses darker title, tagline, and supporting text, keeping the splash and welcome screens visually consistent
+- Restored `LoadingView` to the earlier larger-logo, staggered-animation version with the horizontal tagline entrance that Tone explicitly called back to
 - Reapplied and clarified the exact shared onboarding background direction: a white-to-light-brown `LinearGradient` from top to bottom on both `LoadingView` and `WelcomeView`
 - Tightened the onboarding gradient again so the top stays clearly white and the bottom only shifts into a very light brown, matching the student MacBook screenshot more closely
 - Adjusted welcome cards to sit on lighter surfaces with subtle brown borders so the page matches the prototype tone more closely

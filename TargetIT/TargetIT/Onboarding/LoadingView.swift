@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct LoadingView: View {
-    @State private var logoScale: CGFloat = 0.8
-    @State private var logoOpacity: Double = 0.0
-    @State private var titleOpacity: Double = 0.0
-    @State private var taglineOpacity: Double = 0.0
-    @State private var loadingProgress: CGFloat = 0.0
-
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    // Dynamic Type scaled metrics
-    @ScaledMetric(relativeTo: .largeTitle) private var titleSize = 38
-    @ScaledMetric(relativeTo: .headline) private var taglineSize = 18
+    // Prevents the staged animation from starting more than once.
+    @State private var hasStartedAnimation = false
 
-    // Keep the splash short so it feels polished without slowing the pitch flow.
-    private let splashDuration: TimeInterval = 2.4
+    // These state values drive the staged branded entrance animation.
+    @State private var logoScale: CGFloat = 0.94
+    @State private var logoOpacity: Double = 0.2
+    @State private var titleScale: CGFloat = 0.96
+    @State private var titleOpacity: Double = 0.0
+    @State private var taglineScale: CGFloat = 0.96
+    @State private var taglineOpacity: Double = 0.0
+    @State private var taglineOffset: CGFloat = 28
+    @State private var progressOpacity: Double = 0.0
 
-    // Tone-approved onboarding background.
-    // Keep the top clearly white and let the bottom fade into a very light brown.
+    // Shared onboarding background: white at the top and light brown toward the bottom.
     private let gradientBackground = LinearGradient(
         colors: [
             Color.white,
@@ -39,91 +38,102 @@ struct LoadingView: View {
             gradientBackground
                 .ignoresSafeArea()
 
-            VStack(spacing: 32) {
-                Spacer()
+            VStack(spacing: 24) {
+                // Keep the logo large so the brand reads clearly during launch.
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320, height: 320)
+                    .scaleEffect(logoScale)
+                    .opacity(logoOpacity)
+                    .accessibilityHidden(true)
 
-                // Logo and branding appear first.
-                VStack(spacing: 20) {
-                    Image("logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 220, height: 220)
-                        .scaleEffect(logoScale)
-                        .opacity(logoOpacity)
-                        .accessibilityHidden(true)
+                // The company name appears after the logo.
+                Text("TARGET-IT")
+                    .font(.largeTitle.weight(.bold))
+                    .foregroundStyle(Color("TargetBlack"))
+                    .scaleEffect(titleScale)
+                    .opacity(titleOpacity)
 
-                    Text("TARGET-IT")
-                        .font(.system(size: titleSize, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color("TargetBlack"))
-                        .opacity(titleOpacity)
+                // The tagline fades and slides in after the company name.
+                Text("Track subscriptions. Protect your budget.")
+                    .font(.subheadline)
+                    .foregroundStyle(Color("TargetBrown"))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+                    .scaleEffect(taglineScale)
+                    .opacity(taglineOpacity)
+                    .offset(x: taglineOffset)
 
-                    Text("Track subscriptions. Protect your budget.")
-                        .font(.system(size: taglineSize, weight: .medium))
-                        .foregroundStyle(Color("TargetBrown"))
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(4)
-                        .padding(.horizontal, 24)
-                        .opacity(taglineOpacity)
-                }
-
-                Spacer()
-
-                // The loading bar stays simple and easy for the interns to follow.
-                VStack(spacing: 14) {
-                    loadingBar
-
-                    Text("Loading...")
-                        .font(.system(size: 15, weight: .medium))
-                        .foregroundStyle(Color("TargetBrown"))
-                        .opacity(taglineOpacity)
-                }
-                .padding(.horizontal, 60)
-                .padding(.bottom, 80)
+                // Brown progress indicator shown after the text sequence starts.
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color("TargetBrown")))
+                    .scaleEffect(1.2)
+                    .opacity(progressOpacity)
+                    .padding(.top, 8)
+                    .accessibilityLabel("Loading Target-IT")
+                    .accessibilityHint("Please wait while the app opens")
             }
+            .padding(32)
         }
-        .onAppear {
-            startAnimations()
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Target-IT loading screen")
+        .task {
+            await runLoadingSequence()
         }
     }
 
-    // MARK: - Loading Bar
-    // Simple progress bar inspired by the teaching pattern from the other projects.
-    private var loadingBar: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color("TargetBrown").opacity(0.18))
-                    .frame(height: 8)
+    // Runs the loading animation sequence in a clear, step-by-step order.
+    private func runLoadingSequence() async {
+        guard !hasStartedAnimation else { return }
+        hasStartedAnimation = true
 
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color("TargetBrown"))
-                    .frame(width: geometry.size.width * loadingProgress, height: 8)
-            }
+        if reduceMotion {
+            logoScale = 1.0
+            logoOpacity = 1.0
+            titleScale = 1.0
+            titleOpacity = 1.0
+            taglineScale = 1.0
+            taglineOpacity = 1.0
+            taglineOffset = 0
+            progressOpacity = 1.0
+            return
         }
-        .frame(height: 8)
-    }
 
-    // MARK: - Animation Logic
-    // This uses a simple onAppear animation pattern similar to the other cohort projects.
-    private func startAnimations() {
-        let animationDuration = reduceMotion ? 0.0 : 0.6
-        let progressDuration = reduceMotion ? 0.0 : splashDuration
-
-        withAnimation(.easeOut(duration: animationDuration)) {
+        withAnimation(.easeOut(duration: 0.4)) {
             logoScale = 1.0
             logoOpacity = 1.0
         }
 
-        withAnimation(.easeIn(duration: reduceMotion ? 0.0 : 0.35).delay(reduceMotion ? 0.0 : 0.2)) {
+        guard await sleepUnlessCancelled(nanoseconds: 350_000_000) else { return }
+
+        withAnimation(.easeOut(duration: 0.3)) {
+            titleScale = 1.0
             titleOpacity = 1.0
         }
 
-        withAnimation(.easeIn(duration: reduceMotion ? 0.0 : 0.35).delay(reduceMotion ? 0.0 : 0.4)) {
+        guard await sleepUnlessCancelled(nanoseconds: 260_000_000) else { return }
+
+        withAnimation(.easeOut(duration: 0.45)) {
+            taglineScale = 1.0
             taglineOpacity = 1.0
+            taglineOffset = 0
         }
 
-        withAnimation(.easeInOut(duration: progressDuration)) {
-            loadingProgress = 1.0
+        guard await sleepUnlessCancelled(nanoseconds: 220_000_000) else { return }
+
+        withAnimation(.easeIn(duration: 0.25)) {
+            progressOpacity = 1.0
+        }
+    }
+
+    // Sleeps for a duration and exits early if the SwiftUI task is cancelled.
+    private func sleepUnlessCancelled(nanoseconds: UInt64) async -> Bool {
+        do {
+            try await Task.sleep(nanoseconds: nanoseconds)
+            return !Task.isCancelled
+        } catch {
+            return false
         }
     }
 }
