@@ -206,6 +206,14 @@ The app’s featured Apple accessibility implementation should be visible in the
 - large-type-safe money cards
 - reduce-motion-safe onboarding/tour behavior
 
+## Prototype Interpretation Rule
+
+When using the prototype PDF as a guide:
+
+- the **app prototype screens are the phone/app visuals shown on the left**
+- the **black-background sections on the right are descriptive presentation panels**, not the literal screen background for the app UI
+- if there is a conflict, follow the left-side app mockup for actual in-app styling unless Tone explicitly says otherwise
+
 ## Prototype-Informed Content Patterns
 
 The PDFs point to these feature moments that the UI should visually support:

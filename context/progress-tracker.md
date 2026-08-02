@@ -51,10 +51,9 @@ Update this file after every meaningful implementation change.
 **Branch:** `ab/target-it-phase-3-shell-data`
 
 **Current Focus:**
-- Split the implementation into separate files/folders the way Tone taught the interns
-- Restore `WelcomeView` as the real post-loading entry point
+- Implement real local SwiftData auth entry in Phase 3
+- Keep the onboarding-first flow intact
 - Make `WelcomeView` and `InteractiveTourView` more visually consistent with the Prototype PDF
-- Add real local SwiftData auth entry in Phase 3
 - Keep the implementation style aligned with how Tone taught the interns
 - Log progress after each meaningful step per Tone's instruction
 
@@ -71,6 +70,7 @@ Update this file after every meaningful implementation change.
 - Tone flagged that the current one-file implementation is still not aligned with how the interns were taught, so the next correction is to split it into separate files by screen/component/model
 - Split the implementation into separate onboarding files, main shell files, reusable components, models, and utilities so the structure now matches the teaching pattern more closely
 - Tone approved adding real local SwiftData authentication to Phase 3 so the MVP is a working app rather than placeholder-only auth
+- Phase 3 auth entry implementation has now started on branch `ab/target-it-phase-3-auth-entry`
 - Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
 - Updated `ContentView.swift` to honor Reduce Motion during the LoadingView → WelcomeView handoff by skipping the fade animation when motion reduction is enabled
 - Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
@@ -83,6 +83,8 @@ Update this file after every meaningful implementation change.
 - Tightened the onboarding gradient again so the top stays clearly white and the bottom only shifts into a very light brown, matching the student MacBook screenshot more closely
 - Adjusted welcome cards to sit on lighter surfaces with subtle brown borders so the page matches the prototype tone more closely
 - Screenshot review showed Xcode was paused in the debugger at `LoadingView`, so the white-screen symptom was partly caused by debug pause state rather than the view never loading
+- Shifted the current auth entry implementation from placeholders to real local SwiftData sign-up and login screens
+- Reworked local auth so passwords now use per-user salts with PBKDF2, and the demo image is only assigned intentionally for the Kayla Jones demo user instead of every account
 
 **Phase 3 Correction / Current Direction:**
 - Tone clarified that the first real destination after `LoadingView` must be `WelcomeView`
@@ -90,6 +92,7 @@ Update this file after every meaningful implementation change.
 - `Sign Up` must also provide a path to `Login` for returning users
 - The current shell exists behind onboarding as a spike, but the onboarding-first flow is now the implemented root path
 - Tone clarified that the Prototype PDF is the UI guideline for the MVP, so implementation should stay visually consistent with the PDF
+- Tone clarified an important interpretation rule for that PDF: the actual app UI reference is the prototype shown on the left, while the black-background content on the right is descriptive presentation content, not the literal app screen styling
 - Tone clarified that the code style should stay closer to how the interns were taught in the other cohort projects and include notes explaining meaningful code blocks
 - Tone emphasized that **simple is better** for this team: write for teenage interns, some coding for the first time, and avoid coding it like a senior-dev-only implementation
 
