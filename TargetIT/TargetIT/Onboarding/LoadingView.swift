@@ -150,5 +150,5 @@ struct LoadingView: View {
 }
 
 #Preview {
-    LoadingView(onFinished: {})
+    LoadingView()
 }
