@@ -42,7 +42,8 @@ struct ContentView: View {
                     .transition(.opacity)
                     .onAppear {
                         // The root view controls when the splash hands off.
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+                        let delay = reduceMotion ? 1.0 : 2.4
+                        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                             if reduceMotion {
                                 isShowingLoadingView = false
                             } else {

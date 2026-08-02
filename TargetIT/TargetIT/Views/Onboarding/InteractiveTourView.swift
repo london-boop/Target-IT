@@ -39,6 +39,7 @@ struct InteractiveTourView: View {
                     Text("Step \(currentStep + 1) of \(steps.count)")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color("TargetBrown"))
+                        .accessibilityLabel("Tour step \(currentStep + 1) of \(steps.count)")
 
                     Spacer()
 
@@ -81,6 +82,7 @@ struct InteractiveTourView: View {
                 .padding(.bottom, 20)
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Page \(currentStep + 1) of \(steps.count)")
+                .accessibilityHint("Shows your progress through the interactive tour.")
 
                 // Bottom buttons move the user through the tour in a straightforward way.
                 HStack(spacing: 12) {
@@ -98,6 +100,7 @@ struct InteractiveTourView: View {
                         )
                     }
                     .disabled(currentStep == 0)
+                    .accessibilityHint(currentStep == 0 ? "You are already on the first tour step." : "Moves to the previous tour step.")
 
                     if currentStep == steps.count - 1 {
                         if isReplayMode {
@@ -130,6 +133,7 @@ struct InteractiveTourView: View {
                                         .fill(Color("TargetBrown"))
                                 )
                             }
+                            .accessibilityHint("Moves to sign up after the tour.")
                         }
                     } else {
                         Button(action: goNext) {
@@ -145,6 +149,7 @@ struct InteractiveTourView: View {
                                     .fill(Color("TargetBrown"))
                             )
                         }
+                        .accessibilityHint("Moves to the next tour step.")
                     }
                 }
                 .padding(.horizontal, 24)

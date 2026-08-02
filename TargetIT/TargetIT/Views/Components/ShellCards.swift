@@ -61,6 +61,10 @@ struct SavingsGoalCard: View {
         min(goal.currentAmount / goal.targetAmount, 1.0)
     }
 
+    private var progressText: String {
+        "\(Int(progress * 100)) percent of the goal funded"
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -84,16 +88,22 @@ struct SavingsGoalCard: View {
             ProgressView(value: progress)
                 .tint(Color("Sage"))
                 .accessibilityLabel("Progress for \(goal.title)")
-                .accessibilityValue("\(Int(progress * 100)) percent")
+                .accessibilityValue(progressText)
 
             Text("\(goal.currentAmount.currencyText) of \(goal.targetAmount.currencyText)")
                 .font(.footnote)
                 .foregroundStyle(Color("TargetBlack").opacity(0.68))
+
+            Label(progressText, systemImage: "chart.bar.fill")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(Color("TargetBrown"))
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(panelColor)
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(goal.title), \(goal.currentAmount.currencyText) saved out of \(goal.targetAmount.currencyText), target date \(goal.targetDate.accessibilityDateText), \(progressText)")
     }
 }
 
@@ -101,6 +111,17 @@ struct SavingsGoalCard: View {
 // Small card used for upcoming billing reminders.
 struct ReminderCard: View {
     let reminder: BillingReminder
+
+    private var reminderTypeText: String {
+        switch reminder.type {
+        case .renewal:
+            return "Renewal reminder"
+        case .trial:
+            return "Trial ending reminder"
+        case .digest:
+            return "Billing digest reminder"
+        }
+    }
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -117,6 +138,10 @@ struct ReminderCard: View {
                 Text("\(reminder.amount.currencyText) · \(reminder.dueDate.shortDateText)")
                     .font(.subheadline)
                     .foregroundStyle(Color("TargetBrown"))
+
+                Text(reminderTypeText)
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color("TargetBrown"))
             }
 
             Spacer()
@@ -125,6 +150,7 @@ struct ReminderCard: View {
         .background(panelColor)
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(reminder.title), \(reminderTypeText), \(reminder.amount.currencyText), due \(reminder.dueDate.accessibilityDateText)")
     }
 }
 
@@ -155,6 +181,7 @@ struct NotificationCard: View {
         .background(panelColor)
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(notification.title), \(notification.message), \(notification.timestampLabel)")
     }
 }
 
@@ -167,6 +194,7 @@ struct StatusBadge: View {
         HStack(spacing: 6) {
             Image(systemName: status.iconName)
                 .font(.caption.weight(.bold))
+                .accessibilityHidden(true)
             Text(status.label)
                 .font(.caption.weight(.semibold))
         }
@@ -175,5 +203,7 @@ struct StatusBadge: View {
         .padding(.vertical, 6)
         .background(status.backgroundColor)
         .clipShape(Capsule())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(status.accessibilityText)
     }
 }

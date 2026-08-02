@@ -13,6 +13,8 @@ struct DashboardView: View {
 
     @EnvironmentObject private var appDataStore: AppDataStore
 
+    @ScaledMetric(relativeTo: .largeTitle) private var overviewAmountSize = 40
+
     // Counts subscriptions that are still active or ending soon.
     private var activeSubscriptionsCount: Int {
         appDataStore.subscriptions.filter { $0.status != .canceled }.count
@@ -42,13 +44,16 @@ struct DashboardView: View {
                         .foregroundStyle(Color("TargetBrown"))
 
                     Text(monthlySpend.currencyText)
-                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                        .font(.system(size: overviewAmountSize, weight: .bold, design: .rounded))
                         .foregroundStyle(Color("Gold"))
 
                     Text("\(activeSubscriptionsCount) active subscriptions · \(totalSaved.currencyText) currently saved from canceled services")
                         .font(.subheadline)
                         .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                        .fixedSize(horizontal: false, vertical: true)
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Monthly overview, \(monthlySpend.currencyText) active monthly spend, \(activeSubscriptionsCount) active subscriptions, \(totalSaved.currencyText) currently saved from canceled services")
                 .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(panelColor)
@@ -69,8 +74,18 @@ struct DashboardView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     sectionTitle("Coming Up")
 
-                    ForEach(appDataStore.reminders.prefix(2)) { reminder in
-                        ReminderCard(reminder: reminder)
+                    if appDataStore.reminders.isEmpty {
+                        Text("No upcoming reminders.")
+                            .font(.subheadline)
+                            .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                            .padding(18)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(panelColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    } else {
+                        ForEach(appDataStore.reminders.prefix(2)) { reminder in
+                            ReminderCard(reminder: reminder)
+                        }
                     }
                 }
 

@@ -41,7 +41,7 @@ struct WelcomeView: View {
                         Image("logo")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 380, height: 380)
+                            .frame(maxWidth: 380, maxHeight: 380)
                             .accessibilityHidden(true)
 
                         // Main welcome copy.
@@ -97,6 +97,7 @@ struct WelcomeView: View {
                                 .background(accentColor)
                                 .cornerRadius(16)
                         }
+                        .accessibilityHint("Starts the interactive tour.")
                         .padding(.horizontal, 32)
 
                         // Returning users should be able to log in from the welcome screen.
@@ -110,6 +111,7 @@ struct WelcomeView: View {
                                     .font(.callout.weight(.semibold))
                                     .foregroundStyle(Color("Gold"))
                             }
+                            .accessibilityHint("Opens the returning user login screen.")
                         }
                         .padding(.bottom, 44)
                     }

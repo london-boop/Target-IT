@@ -18,11 +18,22 @@ struct SubscriptionsView: View {
                         .font(.title2.weight(.bold))
                         .foregroundStyle(Color("TargetBlack"))
 
-                    ForEach(appDataStore.subscriptions) { subscription in
-                        NavigationLink(destination: SubscriptionDetailView(subscription: subscription)) {
-                            SubscriptionCard(subscription: subscription)
+                    if appDataStore.subscriptions.isEmpty {
+                        Text("No subscriptions added yet.")
+                            .font(.subheadline)
+                            .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                            .padding(18)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(panelColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    } else {
+                        ForEach(appDataStore.subscriptions) { subscription in
+                            NavigationLink(destination: SubscriptionDetailView(subscription: subscription)) {
+                                SubscriptionCard(subscription: subscription)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityHint("Opens details for \(subscription.name).")
                         }
-                        .buttonStyle(.plain)
                     }
                 }
                 .padding(20)

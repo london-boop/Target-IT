@@ -13,14 +13,17 @@ struct SubscriptionDetailView: View {
     @EnvironmentObject private var appDataStore: AppDataStore
     @Environment(\.dismiss) private var dismiss
 
+    @ScaledMetric(relativeTo: .largeTitle) private var titleSize = 30
+
     @State private var showCancelConfirmation = false
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 Text(subscription.name)
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .font(.system(size: titleSize, weight: .bold, design: .rounded))
                     .foregroundStyle(Color("TargetBlack"))
+                    .fixedSize(horizontal: false, vertical: true)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Category")
@@ -67,10 +70,16 @@ struct SubscriptionDetailView: View {
                         .foregroundStyle(Color("TargetBrown"))
 
                     StatusBadge(status: subscription.status)
+
+                    Text("This status is also announced clearly for VoiceOver users.")
+                        .font(.footnote)
+                        .foregroundStyle(Color("TargetBlack").opacity(0.72))
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(18)
                 .background(panelColor)
                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .accessibilityElement(children: .combine)
 
                 Button(action: {
                     showCancelConfirmation = true
@@ -84,6 +93,7 @@ struct SubscriptionDetailView: View {
                         .cornerRadius(16)
                 }
                 .disabled(subscription.status == .canceled)
+                .accessibilityHint(subscription.status == .canceled ? "This subscription has already been canceled." : "Simulates canceling this subscription and rerouting the savings.")
             }
             .padding(24)
         }

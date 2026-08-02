@@ -16,6 +16,7 @@ struct WelcomeFeatureRow: View {
             Image(systemName: icon)
                 .foregroundStyle(Color("Gold"))
                 .frame(width: 22)
+                .accessibilityHidden(true)
 
             Text(text)
                 .font(.subheadline.weight(.medium))
@@ -30,5 +31,6 @@ struct WelcomeFeatureRow: View {
                 .stroke(Color("TargetBrown").opacity(0.16), lineWidth: 1)
         )
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .accessibilityElement(children: .combine)
     }
 }
