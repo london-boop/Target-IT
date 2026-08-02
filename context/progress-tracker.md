@@ -76,6 +76,18 @@ Update this file after every meaningful implementation change.
 - Added a working `SubscriptionDetailView`
 - Added a simulated cancel flow that updates subscriptions, savings, reminders, and alerts together
 - Wired the shell to use shared local feature state instead of fixed read-only demo arrays
+- Turned `AlertsView` into a simple combined reminder center with upcoming reminders and notification feed sections
+- Added singular/plural summary text and explicit empty states to the reminder center so the screen still reads clearly when one or both lists are empty
+- Fixed the replay-tour build error by giving `InteractiveTourView` an initializer that accepts `isReplayMode`
+
+**Phase 5 Checklist:**
+- ✅ Add a simple local app data store for subscriptions, savings, reminders, and notifications
+- ✅ Build a working subscription detail screen
+- ✅ Let users simulate canceling a subscription
+- ✅ Reflect canceled-subscription savings inside the savings and alerts surfaces
+- ✅ Add reminder center behavior
+- ✅ Keep the implementation readable and intern-friendly
+- ⏳ Run simulator/build verification in the student Xcode environment
 
 ---
 
@@ -85,13 +97,9 @@ Update this file after every meaningful implementation change.
 
 **Goal:** Turn the current shell into a working MVP experience with real local feature behavior.
 
-**Priority Tasks:**
-- Add a simple local app data store for subscriptions, savings, reminders, and notifications
-- Build a working subscription detail screen
-- Let users simulate canceling a subscription
-- Reflect canceled-subscription savings inside the savings and alerts surfaces
-- Keep the implementation readable and intern-friendly
-- Run simulator/build verification in the student Xcode environment
+**Remaining Priority Tasks:**
+- Verify the new subscription detail, cancel flow, and reminder center on the student MacBook in Xcode
+- Keep logging each meaningful Phase 5 feature pass
 
 ---
 
@@ -165,11 +173,11 @@ Update this file after every meaningful implementation change.
 - ✅ Verification and polish pass complete
 
 ### Phase 5 — Core MVP Features
-- 🔄 Implement the working subscriptions flow
-- ⏳ Add reminder center behavior
-- ⏳ Add notification feed behavior
-- ⏳ Connect canceled subscriptions to savings progress
-- ⏳ Add simulated cancel/reroute flow end to end
+- ✅ Implement the working subscriptions flow
+- ✅ Add reminder center behavior
+- ✅ Add notification feed behavior
+- ✅ Connect canceled subscriptions to savings progress
+- ✅ Add simulated cancel/reroute flow end to end
 
 ### Phase 6 — Accessibility & Polish
 - VoiceOver summary refinement
