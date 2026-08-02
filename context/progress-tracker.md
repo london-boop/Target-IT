@@ -89,6 +89,7 @@ Update this file after every meaningful implementation change.
 **Goal:** Keep the corrected onboarding-first flow in place while improving the Welcome, Tour, and auth placeholder screens to better match the Prototype PDF.
 
 **Priority Tasks:**
+- Verify the updated loading sequence now renders visibly in the student simulator before continuing visual polish
 - Refine `WelcomeView` so it stays readable across device sizes and Dynamic Type settings
 - Improve `InteractiveTourView` to better match the PDF while preserving the simple teaching style
 - Keep the placeholder `SignUpView` and `LoginView` consistent with the guided onboarding flow
@@ -122,6 +123,8 @@ Update this file after every meaningful implementation change.
 
 - `ContentView.swift` now follows an onboarding-first root flow: `LoadingView` → `WelcomeView` → placeholder tour/auth stages → `MainTabView`.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
+- Student later reported a white-screen-only simulator launch, so the loading sequence was simplified to a more explicit `.task`-driven step order to make the splash more reliable at runtime.
+- Review feedback noted that `Task.sleep` cancellation should not be suppressed, so the loading sequence now exits cleanly when the SwiftUI task is cancelled.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.
