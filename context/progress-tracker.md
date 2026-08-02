@@ -65,6 +65,7 @@ Update this file after every meaningful implementation change.
 - Removed the extra white logo card/padding so the logo can stand on its own
 - Increased the actual splash logo size so the brand mark reads more clearly during launch
 - Added staged loading animation so content fades in with delay in this order: logo → company name → tagline, followed by the progress indicator
+- Added subtle horizontal motion to the tagline during its entrance so it scrolls in rather than only fading/scaling
 
 ---
 

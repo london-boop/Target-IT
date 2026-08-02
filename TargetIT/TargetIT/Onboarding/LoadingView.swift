@@ -20,6 +20,7 @@ struct LoadingView: View {
     @State private var titleOpacity: Double = 0.0
     @State private var taglineScale: CGFloat = 0.96
     @State private var taglineOpacity: Double = 0.0
+    @State private var taglineOffset: CGFloat = 28
     @State private var progressOpacity: Double = 0.0
 
     // Keep the splash short so it feels polished without slowing the pitch flow.
@@ -62,6 +63,7 @@ struct LoadingView: View {
                         .padding(.horizontal, 24)
                         .scaleEffect(taglineScale)
                         .opacity(taglineOpacity)
+                        .offset(x: taglineOffset)
                 }
 
                 ProgressView()
@@ -90,6 +92,7 @@ struct LoadingView: View {
             titleOpacity = 1.0
             taglineScale = 1.0
             taglineOpacity = 1.0
+            taglineOffset = 0
             progressOpacity = 1.0
             return
         }
@@ -104,9 +107,10 @@ struct LoadingView: View {
             titleOpacity = 1.0
         }
 
-        withAnimation(.easeOut(duration: 0.35).delay(0.44)) {
+        withAnimation(.easeOut(duration: 0.45).delay(0.44)) {
             taglineScale = 1.0
             taglineOpacity = 1.0
+            taglineOffset = 0
         }
 
         withAnimation(.easeIn(duration: 0.25).delay(0.6)) {
