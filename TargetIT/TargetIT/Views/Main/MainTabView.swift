@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct MainTabView: View {
+    // Lets users replay the tour from inside the app shell.
+    @State private var isShowingTour = false
+
     var body: some View {
         TabView {
-            DashboardView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
+            DashboardView(onReplayTour: {
+                isShowingTour = true
+            })
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
 
             SubscriptionsView()
                 .tabItem {
@@ -31,6 +36,11 @@ struct MainTabView: View {
                 }
         }
         .tint(Color("TargetBrown"))
+        .sheet(isPresented: $isShowingTour) {
+            NavigationStack {
+                InteractiveTourView(isReplayMode: true)
+            }
+        }
     }
 }
 

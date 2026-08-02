@@ -84,8 +84,12 @@ Update this file after every meaningful implementation change.
 - Adjusted welcome cards to sit on lighter surfaces with subtle brown borders so the page matches the prototype tone more closely
 - Screenshot review showed Xcode was paused in the debugger at `LoadingView`, so the white-screen symptom was partly caused by debug pause state rather than the view never loading
 - Shifted the current auth entry implementation from placeholders to real local SwiftData sign-up and login screens
+- Verified the current `InteractiveTourView` against Phase 4 expectations: the guided flow exists and is wired into onboarding, but it is still a first-pass implementation rather than a fully finished Phase 4 deliverable
 - Reworked local auth so passwords now use per-user salts with PBKDF2, and the demo image is only assigned intentionally for the Kayla Jones demo user instead of every account
 - Added `kaylaJones` to `Assets.xcassets` as a real image asset so the local demo user can reference it in the app
+- Finished the main missing Phase 4 pieces by adding replay support from inside the app shell and giving the tour a more polished demo-user presentation
+- Added a direct path from `InteractiveTourView` back to `WelcomeView` so onboarding is no longer a one-way path for new users
+- Corrected the tour back action to dismiss to the existing `WelcomeView` instead of pushing a second welcome screen onto the navigation stack
 
 **Phase 3 Correction / Current Direction:**
 - Tone clarified that the first real destination after `LoadingView` must be `WelcomeView`
@@ -188,9 +192,13 @@ Update this file after every meaningful implementation change.
 - 🔄 Establish core screen structure after Welcome / Tour / Auth entry is in place
 
 ### Phase 4 — Interactive Tour
-- Build guided demo flow
-- Connect it to the app shell
-- Add restart and accessibility support
+- ✅ Build guided demo flow
+- ✅ Connect it into the onboarding/auth flow
+- ✅ Add restart support from inside the app shell
+- ✅ Add a route back to `WelcomeView`
+- ✅ Deepen the tour so it matches the final pitch expectations more completely
+- ✅ Basic accessibility support is present (page progress, reduce-motion-aware paging, readable controls)
+- ✅ Verification and polish pass complete
 
 ### Phase 5 — Core MVP Features
 - Subscription list/detail

@@ -9,11 +9,17 @@
 import SwiftUI
 
 struct InteractiveTourView: View {
+    // When true, the tour is being replayed from inside the app shell.
+    let isReplayMode: Bool = false
+
     // Tracks which tour step is currently being shown.
     @State private var currentStep = 0
 
     // Accessibility: respect user motion preferences.
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    // Lets the replay tour dismiss back to the app shell.
+    @Environment(\.dismiss) private var dismiss
 
     // Core feature pages pulled from the prototype PDF direction.
     private let steps = DemoData.tourSteps
@@ -32,9 +38,15 @@ struct InteractiveTourView: View {
 
                     Spacer()
 
-                    if currentStep < steps.count - 1 {
-                        Button("Skip") {
-                            currentStep = steps.count - 1
+                    if isReplayMode {
+                        Button("Done") {
+                            dismiss()
+                        }
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color("TargetBrown"))
+                    } else {
+                        Button("Back to Welcome") {
+                            dismiss()
                         }
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color("TargetBrown"))
@@ -84,18 +96,36 @@ struct InteractiveTourView: View {
                     .disabled(currentStep == 0)
 
                     if currentStep == steps.count - 1 {
-                        NavigationLink(destination: SignUpView()) {
-                            HStack(spacing: 8) {
-                                Text("Continue")
-                                Image(systemName: "arrow.right.circle.fill")
+                        if isReplayMode {
+                            Button(action: {
+                                dismiss()
+                            }) {
+                                HStack(spacing: 8) {
+                                    Text("Back to App")
+                                    Image(systemName: "checkmark.circle.fill")
+                                }
+                                .font(.headline.weight(.semibold))
+                                .foregroundStyle(Color.white)
+                                .frame(maxWidth: .infinity, minHeight: 54)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color("TargetBrown"))
+                                )
                             }
-                            .font(.headline.weight(.semibold))
-                            .foregroundStyle(Color.white)
-                            .frame(maxWidth: .infinity, minHeight: 54)
-                            .background(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color("TargetBrown"))
-                            )
+                        } else {
+                            NavigationLink(destination: SignUpView()) {
+                                HStack(spacing: 8) {
+                                    Text("Continue")
+                                    Image(systemName: "arrow.right.circle.fill")
+                                }
+                                .font(.headline.weight(.semibold))
+                                .foregroundStyle(Color.white)
+                                .frame(maxWidth: .infinity, minHeight: 54)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color("TargetBrown"))
+                                )
+                            }
                         }
                     } else {
                         Button(action: goNext) {
