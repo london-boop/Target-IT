@@ -110,8 +110,9 @@ Update this file after every meaningful implementation change.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
 - Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.
 - Student Xcode build report surfaced two concrete issues, both now addressed in the workspace:
-  - replaced `import Testing` with `XCTest` placeholder tests in `TargetITTests.swift`
+  - simplified unit/UI test placeholder files so they do not import `Testing` or `XCTest` during stabilization
   - renamed conflicting asset names `Black`, `Brown`, and `White` to `TargetBlack`, `TargetBrown`, and `TargetWhite`
+- Student rebuild then reported `No such module 'XCTest'`, so the placeholder test sources were simplified further to import nothing while the project remains in stabilization mode.
 
 ### Product Findings from PDFs
 

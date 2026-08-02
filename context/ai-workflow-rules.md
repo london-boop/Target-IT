@@ -109,6 +109,7 @@ Update the relevant context file whenever implementation changes:
 - Check large Dynamic Type layouts
 - Review VoiceOver labels and announcement logic where relevant
 - Verify Reduce Motion behavior for onboarding/tour animation
+- If Xcode-generated starter tests are blocking the cohort build, it is acceptable to park them temporarily with placeholder files and restore real tests after the MVP foundation is stable
 
 ## Teaching Context
 
