@@ -79,6 +79,7 @@ Update this file after every meaningful implementation change.
 - Turned `AlertsView` into a simple combined reminder center with upcoming reminders and notification feed sections
 - Added singular/plural summary text and explicit empty states to the reminder center so the screen still reads clearly when one or both lists are empty
 - Fixed the replay-tour build error by giving `InteractiveTourView` an initializer that accepts `isReplayMode`
+- Fixed student-Mac build errors in `AppDataStore` by importing `Combine` so `ObservableObject` and `@Published` resolve correctly in Xcode
 
 **Phase 5 Checklist:**
 - ✅ Add a simple local app data store for subscriptions, savings, reminders, and notifications

@@ -6,6 +6,7 @@
 //  This keeps the feature logic readable before deeper persistence work is added.
 //
 
+import Combine
 import Foundation
 import SwiftUI
 
