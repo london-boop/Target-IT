@@ -23,26 +23,23 @@ struct LoadingView: View {
 
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
+            LinearGradient(
+                colors: [
+                    .white,
+                    Color.brown.opacity(0.22)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
             VStack(spacing: 24) {
-                // The logo needs a light surface behind it so the darker "IT"
-                // portion remains readable against the black splash background.
+                // Keep the logo large and unframed so the brand stands on its own.
+                // The lighter gradient background gives the darker "IT" enough contrast.
                 Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 220, height: 220)
-                    .padding(22)
-                    .background(
-                        RoundedRectangle(cornerRadius: 32, style: .continuous)
-                            .fill(Color.white.opacity(0.96))
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 32, style: .continuous)
-                            .stroke(Color.brown.opacity(0.35), lineWidth: 1.5)
-                    )
-                    .shadow(color: .brown.opacity(0.18), radius: 16, x: 0, y: 10)
+                    .frame(width: 280, height: 280)
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
                     .accessibilityHidden(true)
@@ -50,11 +47,11 @@ struct LoadingView: View {
                 VStack(spacing: 8) {
                     Text("TARGET-IT")
                         .font(.largeTitle.weight(.bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.black)
 
                     Text("Track subscriptions. Protect your budget.")
                         .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.78))
+                        .foregroundStyle(.brown.opacity(0.9))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
                 }

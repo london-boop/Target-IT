@@ -61,8 +61,9 @@ Update this file after every meaningful implementation change.
 - Added a short branded loading experience with Reduce Motion-aware behavior
 - Updated `ContentView.swift` to transition from `LoadingView` into a branded welcome placeholder instead of the broken initial layout
 - Logged Xcode-side build issues reported from the student Mac for test imports and asset-name conflicts
-- Improved splash logo readability by placing the logo on a light rounded card so the darker `IT` portion stays visible on the black background
-- Increased the splash logo size so the brand mark reads more clearly during launch
+- Improved splash logo readability by moving the loading screen to a light top-to-bottom gradient so the darker `IT` portion stays visible
+- Removed the extra white logo card/padding so the logo can stand on its own
+- Increased the actual splash logo size so the brand mark reads more clearly during launch
 
 ---
 
