@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct LoadingView: View {
-    // This closure lets the app decide what happens after the splash finishes.
-    let onFinished: () -> Void
-
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // Prevents the staged animation from starting more than once.
