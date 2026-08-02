@@ -209,11 +209,11 @@ These should appear as recognizable pillars in the product layout and tour copy.
 
 ## Current UI State
 
-At the moment, the codebase does **not** match this product direction yet:
+The codebase is still early, but Phase 2 has started moving it in the right direction:
 
-- `ContentView.swift` is still a simple placeholder welcome screen
-- `LoadingView.swift` is incomplete / malformed, but it should remain the team's chosen splash/loading screen concept
-- the loading screen should use native `ProgressView()` with `.brown` circular tint
-- visual hierarchy and navigation shell still need implementation
+- `LoadingView.swift` has been repaired into a valid branded splash screen
+- the loading screen now uses native `ProgressView()` with `.brown` circular tint, as requested by the team
+- `ContentView.swift` now transitions from the loading screen into a branded welcome placeholder
+- the full visual hierarchy, interactive tour, and main navigation shell still need implementation
 
 This file defines the intended direction for the next implementation phases.

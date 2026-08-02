@@ -146,8 +146,13 @@ SwiftUI views
 
 ```text
 TargetITApp
-└── AppRootView
+└── ContentView   # Current temporary root container in Phase 2
     ├── LoadingView   # Team-named splash/loading entry screen
+    └── WelcomeView   # Temporary branded landing state before tour/app shell
+
+Future direction:
+└── AppRootView
+    ├── LoadingView
     ├── WelcomeView
     ├── InteractiveTourView
     └── MainTabView
@@ -177,11 +182,12 @@ Supporting architecture expectations:
 
 ## Known Technical Findings
 
-- `LoadingView.swift` is currently malformed and likely contributes to simulator/build issues.
+- `LoadingView.swift` was malformed and likely contributed to simulator/build issues.
 - The team wants `LoadingView.swift` to remain their splash/loading screen identity, using native SwiftUI `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`.
-- `ContentView.swift` is still a placeholder and does not reflect the prototype architecture.
+- `ContentView.swift` is now acting as a temporary root flow, but it does not yet reflect the final prototype architecture.
 - There appear to be duplicate project artifacts (`TargetIT.xcodeproj` at root and nested path), though the project file contents currently match.
 - Color assets exist, but dark-mode behavior should be verified during implementation because named colors like `Gold`, `Brown`, and `Sage` currently flip to white in dark appearance definitions.
+- Build verification is blocked on this host because Xcode tooling is unavailable in the Linux environment.
 
 ## Architecture Decisions
 
@@ -197,3 +203,5 @@ Supporting architecture expectations:
 ## Implementation Notes
 
 During early build stabilization, it is acceptable to work with simpler in-memory or static seeded data before wiring full SwiftData persistence, as long as the docs and progress tracker are updated to reflect that temporary step.
+
+**Phase 2 implementation note:** the current entry flow is `ContentView` → `LoadingView` → `WelcomeView`, which gives the team a stable splash identity before the interactive tour and full app shell are introduced.

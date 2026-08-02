@@ -6,11 +6,11 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-**Phase 1: Planning & Context Setup**
+**Phase 2: App Stabilization**
 
-**Status:** ✅ COMPLETE
+**Status:** 🔄 IN PROGRESS
 **Date:** 2026-08-02
-**Branch:** `ab/target-it-planning-context`
+**Branch:** `ab/target-it-phase-2-stabilization`
 
 ---
 
@@ -43,7 +43,23 @@ Update this file after every meaningful implementation change.
 
 ## In Progress
 
-- None yet.
+### Phase 2: App Stabilization 🔄
+
+**Status:** IN PROGRESS  
+**Date:** 2026-08-02  
+**Branch:** `ab/target-it-phase-2-stabilization`
+
+**Current Focus:**
+- Repair `LoadingView.swift`
+- Preserve the team's own splash/loading identity
+- Establish a cleaner app entry flow before feature implementation
+- Log progress after each meaningful step per Tone's instruction
+
+**Completed So Far In Phase 2:**
+- Rebuilt `LoadingView.swift` into a valid SwiftUI splash screen
+- Preserved the team's preferred native `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`
+- Added a short branded loading experience with Reduce Motion-aware behavior
+- Updated `ContentView.swift` to transition from `LoadingView` into a branded welcome placeholder instead of the broken initial layout
 
 ---
 
@@ -87,10 +103,11 @@ Update this file after every meaningful implementation change.
 
 ### Current Codebase State
 
-- `ContentView.swift` is a placeholder welcome/logo screen and does not represent the actual product.
-- `LoadingView.swift` appears malformed and is a likely source of build or simulator issues.
+- `ContentView.swift` now acts as a temporary root flow: `LoadingView` → branded welcome placeholder.
+- `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`Black`, `Brown`, `Gold`, `Sage`, `White`) and should be used before adding new palette values.
+- Build verification is currently blocked in this workspace because `xcodebuild` and `swift` are not available on the Linux host.
 
 ### Product Findings from PDFs
 
@@ -104,19 +121,21 @@ Update this file after every meaningful implementation change.
 ## Session Notes
 
 - Tone approved moving from plan mode into context setup.
+- Tone then approved Phase 2 work on branch `ab/target-it-phase-2-stabilization`.
 - This project follows the same overall support pattern used for the other Swift cohort projects.
 - The implementation should stay believable for a local simulator demo rather than pretending to perform live banking or cancellation operations.
 - The interactive tour should help the students explain the product clearly during the pitch, not just onboard an end user.
 - The app should maintain its own individuality and not visually blend into the other cohort projects.
+- **Tone instruction:** always log progress in `/context/progress-tracker.md`.
 
 ---
 
 ## Phase Roadmap (Working Draft)
 
 ### Phase 2 — App Stabilization
-- Fix malformed SwiftUI files
-- Establish a clean entry flow
-- Verify app builds and launches
+- ✅ Fix malformed SwiftUI files
+- ✅ Establish a clean entry flow
+- ⏳ Verify app builds and launches in a macOS/Xcode environment
 
 ### Phase 3 — App Shell & Local Data Foundation
 - Create main shell/navigation
