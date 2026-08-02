@@ -13,7 +13,7 @@
 
 ## System Boundaries
 
-- `TargetIT/TargetIT/Onboarding/` — Splash, intro, interactive tour, and entry flow
+- `TargetIT/TargetIT/Onboarding/` — Splash, welcome, interactive tour, and auth entry flow
 - `TargetIT/TargetIT/Views/` — Main SwiftUI screens until the folder structure is expanded
 - `TargetIT/TargetIT/Models/` — SwiftData entities for subscriptions, savings goals, reminders, and notifications
 - `TargetIT/TargetIT/ViewModels/` — ObservableObject or @Observable types when shared state complexity warrants them
@@ -72,8 +72,9 @@ Use only for lightweight app state such as:
 ## Auth and Access Model
 
 - **No external auth for MVP**
-- Single local user perspective is acceptable for this phase
-- The app behaves like a personal finance assistant on one device
+- Sign Up is the primary new-user entry path after the interactive tour
+- Login must be available from the Sign Up experience for returning users
+- The app behaves like a personal finance assistant on one device during MVP
 - If profile state is needed, keep it local and lightweight
 
 ## Navigation Structure
@@ -83,15 +84,22 @@ Use only for lightweight app state such as:
 ```text
 App Launch
   ↓
-Splash / Branded Intro
+LoadingView
   ↓
-Welcome / Entry Decision
-  ├── Take Interactive Tour
-  │     ↓
-  │   Main Dashboard
-  └── Skip Tour
-        ↓
-      Main Dashboard
+WelcomeView
+  ↓
+Get Started
+  ↓
+InteractiveTourView
+  ↓
+SignUpView
+   └── LoginView (for returning users)
+  ↓
+Main Shell
+  ├── Home / Dashboard
+  ├── Subs / Subscriptions
+  ├── Savings
+  └── Alerts / Notifications
 ```
 
 ### Main App Shell
@@ -117,7 +125,7 @@ Use the simplest architecture that keeps the app teachable and stable.
 Recommended flow:
 
 ```text
-SwiftData / Seed Data
+Seeded local demo data
     ↓
 Light service or view model layer (only when helpful)
     ↓
@@ -126,10 +134,10 @@ SwiftUI views
 
 ### Guidance
 
-- Views may read local data directly using `@Query` when simple
+- Views may read local data directly when simple
 - Introduce view models only when multiple views need shared orchestration
 - Keep business rules small and explicit so students can follow them
-- Use seeded local data to simulate real subscription behavior
+- Use seeded local data to simulate real subscription behavior before full SwiftData persistence lands
 
 ## Invariants
 
@@ -140,26 +148,24 @@ SwiftUI views
 5. **Animations must respect Reduce Motion**.
 6. **SwiftData operations must remain on the main actor / UI-safe path**.
 7. **Interactive tour is part of the product, not disposable marketing-only UI**.
-8. **Context docs must stay synchronized with implementation decisions**.
+8. **WelcomeView is the post-loading entry point before the main shell**.
+9. **Context docs must stay synchronized with implementation decisions**.
 
 ## Proposed Screen Structure
 
 ```text
 TargetITApp
-└── ContentView   # Current temporary root container in Phase 2
-    ├── LoadingView   # Team-named splash/loading entry screen
-    └── WelcomeView   # Temporary branded landing state before tour/app shell
-
-Future direction:
-└── AppRootView
+└── ContentView   # Root container
     ├── LoadingView
     ├── WelcomeView
     ├── InteractiveTourView
+    ├── SignUpView
+    ├── LoginView
     └── MainTabView
         ├── DashboardView
-        ├── SubscriptionListView
-        ├── SavingsHubView
-        └── AlertsView / NotificationCenterView
+        ├── SubscriptionsView
+        ├── SavingsView
+        └── AlertsView
 ```
 
 ## Accessibility Architecture Direction
@@ -184,9 +190,9 @@ Supporting architecture expectations:
 
 - `LoadingView.swift` was malformed and likely contributed to simulator/build issues.
 - The team wants `LoadingView.swift` to remain their splash/loading screen identity, using native SwiftUI `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`.
-- `ContentView.swift` is now acting as a temporary root flow, but it does not yet reflect the final prototype architecture.
+- A first-pass `MainTabView` shell spike exists behind onboarding, and the current implemented root flow now follows Tone's corrected path: `LoadingView` → `WelcomeView` → `InteractiveTourView` → `SignUpView`, with `LoginView` available for existing users.
 - There appear to be duplicate project artifacts (`TargetIT.xcodeproj` at root and nested path), though the project file contents currently match.
-- Color assets exist, but dark-mode behavior should be verified during implementation because named colors like `Gold` and `Sage` currently flip to white in dark appearance definitions.
+- Color assets exist, but dark-mode behavior should be verified during implementation because named colors like `Gold` and `Sage` were originally flipping to white in dark appearance definitions.
 - Conflicting asset names `Black`, `Brown`, and `White` were renamed to `TargetBlack`, `TargetBrown`, and `TargetWhite` to avoid generated symbol conflicts in Xcode.
 - Build verification is blocked on this host because Xcode tooling is unavailable in the Linux environment.
 
@@ -196,8 +202,11 @@ Supporting architecture expectations:
 |----------|--------|--------|
 | Local-only MVP | Decided | Tone confirmed no external APIs are needed |
 | SwiftData for main persistence | Planned | Best fit for local seeded finance demo |
+| Seed data before persistence | Active | Fastest way to make the MVP shell demoable in simulator |
 | Interactive tour as core feature | Decided | Required for pitch/demo use |
-| Tab-based main shell | Planned | Matches the prototype navigation language |
+| Welcome before tour | Decided | Tone clarified WelcomeView is the real app entry after loading |
+| Sign Up with Login path | Decided | Returning users need a direct auth route |
+| Tab-based main shell | Active | Matches the prototype navigation language |
 | VoiceOver-first billing awareness | Decided | Best Apple accessibility fit for the product |
 | Simulated cancellation and savings routing | Decided | Keeps claims believable without backend integrations |
 
@@ -205,4 +214,4 @@ Supporting architecture expectations:
 
 During early build stabilization, it is acceptable to work with simpler in-memory or static seeded data before wiring full SwiftData persistence, as long as the docs and progress tracker are updated to reflect that temporary step.
 
-**Phase 2 implementation note:** the current entry flow is `ContentView` → `LoadingView` → `WelcomeView`, which gives the team a stable splash identity before the interactive tour and full app shell are introduced.
+**Current implementation note:** a first-pass shell spike still exists behind onboarding, but the implemented root flow now follows Tone's corrected path: `LoadingView` → `WelcomeView` → `InteractiveTourView` → `SignUpView`, with `LoginView` available for existing users. Remaining work is visual polish and deeper behavior, not restoring the flow itself.

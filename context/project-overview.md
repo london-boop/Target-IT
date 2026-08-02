@@ -36,14 +36,17 @@ The team will also use an **interactive tour** to walk judges or stakeholders th
 
 ## Core User Flow
 
-1. User launches Target-IT and sees branded onboarding / splash experience.
-2. User can start an **interactive tour** that explains the problem, solution, and main app features.
-3. User enters the main dashboard and sees high-level subscription totals and upcoming billing activity.
-4. User opens the subscription area to review recurring services and statuses.
-5. User simulates canceling an unwanted subscription.
-6. App shows that the canceled amount can be rerouted into a savings goal.
-7. User checks reminders / notifications for upcoming renewals, trial expirations, and savings milestones.
-8. User returns to the dashboard with a clearer picture of recurring spending.
+1. User launches Target-IT and sees the branded loading / splash experience.
+2. Loading transitions into `WelcomeView`, which acts as the true entry point to the app.
+3. User taps **Get Started** to begin the **interactive tour**.
+4. Interactive tour explains the problem, solution, and main app features.
+5. Tour continues into **Sign Up** for new users.
+6. Sign Up also offers a path to **Login** for returning users.
+7. After onboarding/auth entry, user reaches the main app experience and sees high-level subscription totals and upcoming billing activity.
+8. User opens the subscription area to review recurring services and statuses.
+9. User simulates canceling an unwanted subscription.
+10. App shows that the canceled amount can be rerouted into a savings goal.
+11. User checks reminders / notifications for upcoming renewals, trial expirations, and savings milestones.
 
 ## Features
 
@@ -51,8 +54,10 @@ The team will also use an **interactive tour** to walk judges or stakeholders th
 
 - Branded splash / loading experience that feels distinct to the Target-IT team
 - **Interactive tour** for demos and presentations
+- `WelcomeView` as the post-loading entry point
 - Clear product education before deeper navigation
 - Restartable tour from within the app
+- Sign Up flow with Login path for returning users
 
 ### Subscription Tracking
 

@@ -2,7 +2,7 @@
 
 ## Theme
 
-Target-IT should feel like a polished finance product: confident, premium, and easy to scan. The prototype points toward a **dark dashboard interface** with bright savings totals, high-contrast cards, and warm gold highlights that communicate value. Even though this is an MVP, the app should feel deliberate and investor-demo ready.
+Target-IT should feel like a polished finance product: confident, premium, and easy to scan. The **Prototype PDF is the primary UI guideline for the MVP**, so implemented screens should stay visually consistent with that reference. The prototype points toward a **dark dashboard interface** with bright savings totals, high-contrast cards, and warm gold highlights that communicate value. Even though this is an MVP, the app should feel deliberate and investor-demo ready.
 
 ### Experience Goals
 
@@ -12,6 +12,7 @@ Target-IT should feel like a polished finance product: confident, premium, and e
 - Make reminder urgency easy to scan without becoming visually noisy
 - Keep the interactive tour visually aligned with the product, not like a detached slide deck
 - Preserve a team-specific identity so Target-IT does not look cloned from the other cohort apps
+- Keep the MVP UI consistent with the Prototype PDF in hierarchy, tone, and visual direction
 
 ## Colors
 
@@ -19,15 +20,15 @@ The project already includes named color assets that should anchor the design.
 
 | Role | Asset Name | Approx. Value | Usage |
 |------|------------|---------------|-------|
-| Base background | `TargetBlack` | `#000000` (light appearance) | App background, dark shell, premium contrast foundation |
-| Primary text / inverted surfaces | `TargetWhite` | `#FFFFFF` | Text on dark surfaces, high-contrast labels |
-| Warm accent | `Gold` | approx `#CCA817` | Totals, highlights, key money moments, progress emphasis |
-| Secondary accent | `TargetBrown` | approx `#614913` | Supporting financial accents, chart details, buttons, badges |
-| Success / savings accent | `Sage` | approx `#85CF A2` | Savings growth, successful cancellation outcomes, positive states |
+| Base background | `TargetBlack` | deep charcoal | App background, dark shell, premium contrast foundation |
+| Primary text / inverted surfaces | `TargetWhite` | soft white | Text on dark surfaces, high-contrast labels |
+| Warm accent | `Gold` | golden highlight | Totals, highlights, key money moments, progress emphasis |
+| Secondary accent | `TargetBrown` | muted warm brown | Supporting financial accents, chart details, buttons, badges |
+| Success / savings accent | `Sage` | soft green | Savings growth, successful cancellation outcomes, positive states |
 
 ### Important Note
 
-Several current color assets use white in dark appearance variants. During implementation, verify actual runtime usage and correct asset definitions if the dark theme becomes visually inconsistent.
+These colors were corrected so their dark appearance variants no longer flip key interface colors to pure white unexpectedly.
 
 ## Color Usage Rules
 
@@ -35,6 +36,7 @@ Several current color assets use white in dark appearance variants. During imple
 - Use `Sage` for positive outcomes like “saved”, “goal progress”, and successful reroutes
 - Use `TargetBrown` for softer supporting emphasis and secondary finance accents
 - Use `TargetWhite` for primary text on dark surfaces
+- Use `TargetBlack` as the anchor surface behind all major finance content
 - Never rely on color alone to indicate subscription status
 
 ## Typography
@@ -106,6 +108,13 @@ Target-IT should feel smooth and modern, not sharp or boxy.
 - Short reinforcing value statement
 - Keep the screen visually distinct from the other cohort apps even if the implementation stays simple
 
+### Welcome + Interactive Tour Entry
+
+- `WelcomeView` is the true post-loading entry point
+- Primary CTA: `Get Started`
+- `Get Started` routes into the interactive tour
+- Welcome screen should feel like the start of the app, not a disposable placeholder
+
 ### Interactive Tour
 
 Preferred format:
@@ -114,6 +123,7 @@ Preferred format:
 - next / back / skip controls
 - clear pitch-oriented copy
 - optional highlight panels showing sample subscriptions, reminders, and savings outcomes
+- tour should lead naturally into Sign Up
 
 ### Dashboard
 
@@ -209,11 +219,15 @@ These should appear as recognizable pillars in the product layout and tour copy.
 
 ## Current UI State
 
-The codebase is still early, but Phase 2 has started moving it in the right direction:
+The codebase is still early, and the Phase 3 flow has been corrected.
+
+**UI rule:** when implementation decisions are made, the Prototype PDF should win over ad hoc styling choices unless Tone explicitly changes direction.
 
 - `LoadingView.swift` has been repaired into a valid branded splash screen
-- the loading screen now uses native `ProgressView()` with `.brown` circular tint, as requested by the team
-- `ContentView.swift` now transitions from the loading screen into a branded welcome placeholder
-- the full visual hierarchy, interactive tour, and main navigation shell still need implementation
+- the loading screen uses native `ProgressView()` with `.brown` circular tint, as requested by the team
+- a first-pass tab shell spike exists for local seeded content behind onboarding
+- `WelcomeView` is now the real post-loading entry point
+- placeholder `InteractiveTourView`, `SignUpView`, and `LoginView` screens are already in place to preserve the correct flow
+- the remaining work is to make those placeholder onboarding screens richer and more PDF-consistent while keeping the simple teaching style
 
 This file defines the intended direction for the next implementation phases.

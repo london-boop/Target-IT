@@ -6,11 +6,12 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-**Phase 2: App Stabilization**
+**Phase 3: App Shell & Local Data Foundation**
 
 **Status:** 🔄 IN PROGRESS
 **Date:** 2026-08-02
-**Branch:** `ab/target-it-phase-2-stabilization`
+**Branch:** `ab/target-it-phase-3-shell-data`  
+**Review branch note:** if OpenClaw exports changes through a different review branch name (for example `vscode-changes`), keep this value as the historical implementation branch and note the exported branch separately.
 
 ---
 
@@ -43,55 +44,65 @@ Update this file after every meaningful implementation change.
 
 ## In Progress
 
-### Phase 2: App Stabilization 🔄
+### Phase 3: App Shell & Local Data Foundation 🔄
 
 **Status:** IN PROGRESS  
 **Date:** 2026-08-02  
-**Branch:** `ab/target-it-phase-2-stabilization`
+**Branch:** `ab/target-it-phase-3-shell-data`
 
 **Current Focus:**
-- Repair `LoadingView.swift`
-- Preserve the team's own splash/loading identity
-- Establish a cleaner app entry flow before feature implementation
+- Split the implementation into separate files/folders the way Tone taught the interns
+- Restore `WelcomeView` as the real post-loading entry point
+- Make `WelcomeView` and `InteractiveTourView` more visually consistent with the Prototype PDF
+- Keep the implementation style aligned with how Tone taught the interns
 - Log progress after each meaningful step per Tone's instruction
 
-**Completed So Far In Phase 2:**
-- Rebuilt `LoadingView.swift` into a valid SwiftUI splash screen
-- Preserved the team's preferred native `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`
-- Added a short branded loading experience with Reduce Motion-aware behavior
-- Updated `ContentView.swift` to transition from `LoadingView` into a branded welcome placeholder instead of the broken initial layout
-- Logged Xcode-side build issues reported from the student Mac for test imports and asset-name conflicts
-- Improved splash logo readability by moving the loading screen to a light top-to-bottom gradient so the darker `IT` portion stays visible
-- Removed the extra white logo card/padding so the logo can stand on its own
-- Increased the actual splash logo size so the brand mark reads more clearly during launch
-- Added staged loading animation so content fades in with delay in this order: logo → company name → tagline, followed by the progress indicator
-- Added subtle horizontal motion to the tagline during its entrance so it scrolls in rather than only fading/scaling
+**Completed So Far In Phase 3:**
+- Updated the phase branch and tracker for Phase 3 work
+- Built a first-pass tab shell spike to test local data structure and core sections
+- Added local demo models and seeded data for subscriptions, savings goals, reminders, and alerts
+- Added first-pass Home, Subs, Savings, and Alerts screens using the local seeded data
+- Corrected asset color definitions so dark mode no longer flips core named colors to white
+- Reinserted `WelcomeView` as the true post-loading entry point
+- Added placeholder `InteractiveTourView`, `SignUpView`, and `LoginView` stages so the corrected onboarding-first app flow exists in code before deeper feature polish
+- Simplified the root flow to match the teaching style used in the other cohort apps: `NavigationStack`, `NavigationLink`, and straightforward screen-to-screen progression
+- Added explanatory comments throughout the implementation so interns can understand what each code block does
+- Tone flagged that the current one-file implementation is still not aligned with how the interns were taught, so the next correction is to split it into separate files by screen/component/model
+- Split the implementation into separate onboarding files, main shell files, reusable components, models, and utilities so the structure now matches the teaching pattern more closely
+- Added accessibility grouping to `ReminderCard` so VoiceOver behavior matches sibling cards
+- Wrapped `WelcomeView` content in a `ScrollView` so the CTA path remains reachable on smaller devices and larger Dynamic Type sizes
+
+**Phase 3 Correction / Current Direction:**
+- Tone clarified that the first real destination after `LoadingView` must be `WelcomeView`
+- Correct onboarding flow should be: `LoadingView` → `WelcomeView` → `Interactive Tour` → `Sign Up`
+- `Sign Up` must also provide a path to `Login` for returning users
+- The current shell exists behind onboarding as a spike, but the onboarding-first flow is now the implemented root path
+- Tone clarified that the Prototype PDF is the UI guideline for the MVP, so implementation should stay visually consistent with the PDF
+- Tone clarified that the code style should stay closer to how the interns were taught in the other cohort projects and include notes explaining meaningful code blocks
 
 ---
 
 ## Next Up
 
-### Phase 2: App Stabilization
+### Phase 3: App Shell & Local Data Foundation
 
-**Goal:** Repair the current SwiftUI foundation so the app launches and runs reliably in simulator.
+**Goal:** Keep the corrected onboarding-first flow in place while improving the Welcome, Tour, and auth placeholder screens to better match the Prototype PDF.
 
 **Priority Tasks:**
-- Inspect and fix malformed `LoadingView.swift` while preserving it as the team's splash/loading screen
-- Implement the team's preferred loading indicator: native `ProgressView()` with `CircularProgressViewStyle(tint: .brown)`
-- Review `ContentView.swift` and replace placeholder assumptions with a real entry flow direction
-- Verify which project path is the true working target and avoid confusion from duplicate artifacts
-- Run simulator/build verification
-- Document any structural fixes before building feature flows
+- Refine `WelcomeView` so it stays readable across device sizes and Dynamic Type settings
+- Improve `InteractiveTourView` to better match the PDF while preserving the simple teaching style
+- Keep the placeholder `SignUpView` and `LoginView` consistent with the guided onboarding flow
+- Continue splitting implementation into clear screen/component/model files when needed
+- Run simulator/build verification in the student Xcode environment
 
 ---
 
 ## Open Questions
 
-1. Should the MVP use a lightweight welcome screen before the interactive tour, or should the tour be the primary first-run experience?
+1. Should the interactive tour auto-advance, manual-advance, or support both?
 2. Do we want a single local user perspective only, or a simple local profile state for demo personalization?
-3. Should the main app shell use `TabView` exactly as implied by the prototype (`Home`, `Subs`, `Savings`, `Alerts`), or adapt it slightly for cleaner demo flow?
-4. Should the interactive tour auto-advance, manual-advance, or support both?
-5. Do we want seeded subscriptions to mirror the PDF examples directly (Netflix, Spotify, YouTube, Gym Pass) for pitch familiarity?
+3. Do we want seeded subscriptions to mirror the PDF examples directly (Netflix, Spotify, YouTube, Gym Pass) for pitch familiarity?
+4. After onboarding, should the user land on Home/Dashboard first or another section?
 
 ---
 
@@ -109,7 +120,7 @@ Update this file after every meaningful implementation change.
 
 ### Current Codebase State
 
-- `ContentView.swift` now acts as a temporary root flow: `LoadingView` → branded welcome placeholder.
+- `ContentView.swift` now follows an onboarding-first root flow: `LoadingView` → `WelcomeView` → placeholder tour/auth stages → `MainTabView`.
 - `LoadingView.swift` has been repaired and now uses the team's preferred native brown circular `ProgressView()`.
 - The project includes matching root and nested `.xcodeproj` files, which may confuse future edits even though the contents currently match.
 - Existing color assets are present (`TargetBlack`, `TargetBrown`, `Gold`, `Sage`, `TargetWhite`) and should be used before adding new palette values.
@@ -132,6 +143,7 @@ Update this file after every meaningful implementation change.
 
 - Tone approved moving from plan mode into context setup.
 - Tone then approved Phase 2 work on branch `ab/target-it-phase-2-stabilization`.
+- Tone approved continuing Phase 3 and later clarified that Welcome must remain the post-loading entry point.
 - This project follows the same overall support pattern used for the other Swift cohort projects.
 - The implementation should stay believable for a local simulator demo rather than pretending to perform live banking or cancellation operations.
 - The interactive tour should help the students explain the product clearly during the pitch, not just onboard an end user.
@@ -149,9 +161,9 @@ Update this file after every meaningful implementation change.
 - ⏳ Verify app builds and launches in a macOS/Xcode environment
 
 ### Phase 3 — App Shell & Local Data Foundation
-- Create main shell/navigation
-- Seed local subscription, savings, and reminder data
-- Establish core screen structure
+- 🔄 Rework shell implementation around the corrected onboarding flow
+- ✅ Seed local subscription, savings, and reminder data
+- 🔄 Establish core screen structure after Welcome / Tour / Auth entry is in place
 
 ### Phase 4 — Interactive Tour
 - Build guided demo flow

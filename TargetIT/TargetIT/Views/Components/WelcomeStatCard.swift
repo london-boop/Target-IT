@@ -1,0 +1,29 @@
+//
+//  WelcomeStatCard.swift
+//  TargetIT
+//
+//  Small preview card used to match the finance-dashboard personality from the PDF.
+//
+
+import SwiftUI
+
+struct WelcomeStatCard: View {
+    let title: String
+    let value: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Color("TargetWhite").opacity(0.72))
+
+            Text(value)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(Color("Gold"))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(Color.white.opacity(0.08))
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+}

@@ -14,6 +14,9 @@ Build Target-IT incrementally using a spec-driven workflow. The context files de
 - Treat the interactive tour as a real product unit, not leftover polish
 - Keep accessibility work integrated into the feature being built rather than postponed to the very end
 - Preserve the team's own visual identity instead of defaulting to patterns from the other cohort apps
+- Use the Prototype PDF as the main UI guide for the MVP; do not drift into unplanned styling that conflicts with the PDF
+- Match the teaching style used in the other cohort Swift projects: prefer straightforward `NavigationStack` / `NavigationLink` flows before introducing more advanced routing patterns
+- Add notes/comments that explain what meaningful code blocks do so interns can follow the implementation
 
 ## Recommended Phase Order
 
