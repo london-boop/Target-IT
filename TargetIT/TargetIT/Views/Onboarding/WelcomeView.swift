@@ -41,7 +41,7 @@ struct WelcomeView: View {
                         Image("logo")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 255, height: 255)
+                            .frame(width: 380, height: 380)
                             .accessibilityHidden(true)
 
                         // Main welcome copy.

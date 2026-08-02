@@ -43,7 +43,7 @@ struct LoadingView: View {
                 Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 320, height: 320)
+                    .frame(width: 380, height: 380)
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
                     .accessibilityHidden(true)
